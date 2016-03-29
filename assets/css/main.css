@@ -3269,12 +3269,16 @@
 		}
 
 		.wrapper.style3 {
-			background-color: #993366;
+			background-color: #b74e91;
 		}
 
 		.wrapper.style3-alt {
 			background-color: #953d75;
 		}
+		
+
+		
+		
 
 		.wrapper.fullscreen {
 			display: -moz-flex;
