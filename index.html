@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<!--
+	Hyperspace by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Fiorano Open Source</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="index_files/assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="index_files/assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="index_files/assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="index_files/assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+				<p><a href="http://www.fiorano.com/products/opensource/esb-core" class="image"><img src="index_files/images/fiorano_logo.png" alt="" valign="left" /></a> &nbsp;&nbsp;&nbsp;</p>
+					<nav>
+						<ul>
+							<li><a href="#intro"> Open Source</a></li>
+							<li><a href="#one">github Repositories</a></li>
+							<li><a href="#two">Quick Start Guide</a></li>
+							<li><a href="#three">Why Fiorano?</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+		<!-- Intro -->
+			<section id="intro" class="wrapper style1 fullscreen fade-up">
+				<div class="inner">
+				<h1>Fiorano Open Source</h1>
+				<p>Fiorano's Open source Platform provides life cycle management of microservices, microservice flows and automates communication between microservices using Fiorano ESB.<br>Fiorano Open Source microservice container is built on top of industry standards including OSGi (Apache Karaf) and JMS (Apache ActiveMQ).</p>
+				<!-- <img src="images/EsbContainerPlatform.png" alt="" style="width:800px;height:400px;"> -->
+				<div class="12u$"><span class="image fit"><img src="index_files/images/EsbContainerPlatform.png" alt="FioranoOpenESB" style="width:780px;height:400px;" align="middle" /></span></div>
+
+				<p>Fiorano's Open Source wire level protocol called Component (Microservice) Control Protocol (CCP) allows asynchronous communication between the Open Source ESB server and the microservices. </p>
+			<!-- Table -->
+				<section>
+					<h3>Note</h3>
+					<div class="table-wrapper">
+						<table>
+							<tbody>
+								<tr>
+									<td>CCP is used by the microservices to communicate with server for commands such as fetch configuration, initiate shutdown, and set log level.</td>
+								</tr>
+						</table>
+					</div>
+							
+					<div class="table-wrapper">
+						<table class="alt">
+							<tbody>
+								<tr>
+									<td><center><b>Communication</b></center></td>
+									<td><center><b>Runtime Deployment</b></center></td>
+									<td><center><b>Monitoring</b></center></td>
+								</tr>
+								<tr>
+									<td>Deployed Microservices communicate asynchronously using JMS</td>
+									<td>
+									<ul>
+									<li>Automatically creates the JMS endpoints (i.e. message queues and Topics) for individual Microservices</li>
+									<li>Also creates “routes” for communication </li>
+									</ul>
+									</td>
+									<td>
+									<ul>
+									<li>Includes tools and APIs for managing and monitoring Microservices</li>
+									<li>Ability to debug and modify message flows between Microservices</li>
+									</ul>
+									</td>
+								</tr>
+							</tbody>	
+						</table>
+					</div>
+				</section>
+								
+				<section>
+					<h3>Fiorano Microservice Toolkit</h3>
+					<div class="table-wrapper">
+						<table>
+							<tbody>
+								<tr>
+									<td><div class="12u$"><span class="image fit"><img src="index_files/images/FioranoMicroserviceToolkit.png" alt="FioranoMicroserviceToolkit" style="width:850px;height:500px;" /></span></div></td>
+								</tr>
+						</table>
+					</div>
+				</section>
+				</div>
+			</section>	
+						<!-- One -->
+					<section id="one" class="wrapper style3 fade-up">
+						<div class="inner">
+							<ul class="icons">
+								<h2>
+									<li><a href="https://github.com/FioranoSoftware	" class="fa-github"><span class="label">GitHub</span></a>&nbspGitHub Resources</li>
+								</h2>
+							</ul>
+							
+								<p>Fiorano's Open source repositories and their respective Documentation Wikis are available in the Fiorano github pages as listed below. <a href="https://github.com">Sign Up/In to github </a> so that you can contribute to the following repositories by <a href="https://help.github.com/articles/fork-a-repo/"> forking </a> them.
+								</p>
+							
+							<div class="table-wrapper" style="width:100%">
+							<table>
+								<thead>
+									<tr>
+										<td><h3>Repository</h3></td>
+										<td><h3>Description</h3></td>
+										<td><h3>Wiki</h3></td>
+									</tr>
+								</thead>	
+								<tbody>
+									<tr>
+										<td>
+										<a href="https://github.com/prathew/Fiorano-Microservice-Platform">Fiorano Microservice Platform</a>
+										</td>
+										
+										<td>
+											Fiorano's Open source Platform provides life cycle management of microservices, microservice flows and automates communication between microservices using Fiorano ESB.
+											<ul class="actions">
+												<li><a href="http://www.fiorano.com/architecture/Fiorano-Microservices.php" class="button">Learn more</a></li>
+										</td>
+										
+										<td><a href="https://github.com/prathew/Fiorano-Microservice-Platform/wiki">Platform Wiki</a>
+										</td>
+									</tr>
+												
+									<tr>
+										<td>
+											<a href="https://github.com/prathew/Fiorano-Microservice-Framework">Fiorano Microservice Framework</a>
+										</td>
+													
+										<td>
+											Fiorano Microservice framework provides SDKs (presently in Java, C#, C and C++) to build microservices. The business logic can be plugged into the generated code. The microservices can then be build and deployed to Fiorano Microservice Platform using Maven.
+											<ul class="actions">
+											<li><a href="http://www.fiorano.com/architecture/Fiorano-Microservice-Keybenefits.php" class="button">Learn more</a></li>
+										</td>
+
+										<td>
+											<a href="https://github.com/prathew/Fiorano-Microservice-Framework/wiki">Framework Wiki</a>
+										</td>
+									</tr>
+								</tbody>	
+							</table>
+							</div>
+						</div>
+					</section>		
+								
+						<!--	<div class="features">
+								<section>
+									<span class="icon major fa-edit"></span>
+									<h3><a href="https://github.com/FioranoSoftware">Fiorano github pages</a></h3>
+									<ul>
+										<li><h4><a href="https://github.com/prathew/Fiorano-Microservice-Framework">Fiorano Microservice Framework</a></h4></li>
+										<li><h4><a href="https://github.com/prathew/Fiorano-Microservice-Platform">Fiorano Microservice Platform</a></h4></li>
+									</ul>
+								</section>
+							</div> -->
+							<!-- <ul class="actions">
+								<li><a href="https://github.com/FioranoSoftware" class="button">github repositories</a></li>
+							</ul> 
+						</div>
+					</section>-->
+					
+					<!-- Two -->
+					<section id="two" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Getting Started</h2>
+								<p>The below section helps you get started with the project in a few minutes time.</p>
+							
+							<h3>System Requirements</h3>
+							Ensure that the following are installed in the system:
+								<ul><ul><li>Maven</li>
+									<li>Java 1.7 or higher version</li>
+										<ul>	
+											<li>Set JDK path</li>
+										</ul></ul>
+									</ul>
+							<h3>Installation and Configuration</h3>		
+							<ol>
+								<li>Download the binary or source code.</li>
+									<p>Go to <a href="https://github.com/chaitanya-kadayinte/repo1"> Open Source repo </a> and click the Download Zip button to download source code zip.</p>
+								<li>Extract the files to a preferred location.</li><br>
+								<li>Configure the extracted configuration files.<br>
+									Go to <b>$FioranoHome$</b> > <b>etc</b> and provide configuration as required in the following files:
+									<ul><ul>
+										<li><b>Transport Configuration</b><br>Provide Transport Server related details in the <i>com.fiorano.openesb.transport.provider.cfg</i> file.</li>
+										<li><b>RMI Configuration</b><br>Provide RMI details in the <i>com.fiorano.openesb.rmiconnector.cfg</i> file.</li>
+										<li><b>Server Configuration</b><br>Provide server lookup and connection timeout value in the <i>com.fiorano.openesb.server.cfg</i> file.</li>
+									</ul></ul></li>
+								<li>Start the server.<br>Go to %FiroanoHome% > bin  and run:</li>
+									<ul><ul>
+										<li><b>Windows</b>: fiorano.bat</li>
+										<li><b>Linux</b>: ./fiorano</li>
+									</ul></ul>
+								<li>Download <a href="http://fiorano.com/documentation/display/PUB/eStudio">eStudio </a> orchestration tool to create flows.</li>
+								<li><a href="http://fiorano.com/documentation/display/PUB/Examples" > Create flows using estudio</a> and <a href="http://fiorano.com/documentation/display/PUB/Deploying+in+Enterprise+Server"> deploy them to the server.</a></li>
+								<li><a href="http://fiorano.com/documentation/display/PUB/Common+Configurations#CommonConfigurations-ComponentInstancePropertiesComponentInstanceProperties">On the fly changes</a> to the flows with zero downtime.</li>
+								<li><a href="http://fiorano.com/documentation/display/PUB/Debugging+Applications"> Add breakpoints and intercept messages</a></li>
+							</ol>
+							<ul class="actions">
+								<li><a href="https://github.com/FioranoSoftware" class="button">github repositories</a></li>
+						</div>
+					</section>
+					
+					<!-- Three -->
+					<section id="three" class="wrapper style2 spotlights">
+					
+							<!--<a href="#" class="image"><img src="images/pic03.jpg" alt="" data-position="25% 25%" /></a>-->
+							<div class="inner">
+								<div class="row">
+									<div class="6u 12u$(medium)">
+									<h3>Fiorano Microservice Deployment Pack Benefits</h3>
+										<ul>
+										<li>Free integrated deployment environment for Microservices and flows</li>
+											<ul><ul>
+												<li>Includes eStudio – eclipse-based graphical tool to visually define interactions and communications between various microservices in a flow.</li>
+												<li>Define applications (‘flows’) as a composition of multiple microservice instances</li>
+												<li>Modify/change microservice source-code or configurations</li>
+											</ul></ul>	
+										<li>Free Web-based dashboard to monitor/manage microservices deployed across the Fiorano ESB/Container network</li><br>
+										<li>Multiple commonly-used services included for free: JSON CBR, Aggregator, Splitter, Join, Timer, Sleep, Duplicate Content Check, Sequencer</li>
+										</ul>	
+										<hr>
+									</div>
+										
+									<div class="6u$ 12u$(medium)">
+										<h3>Why Customers Worldwide Choose Fiorano?</h3>
+										<ul>
+										<li>Proven, comprehensive, interoperable, and scalable SOA infrastructure solutions. </li>
+										<li> 24x7 technical support team that ensures the highest levels of customer satisfaction.</li>
+										<li>Solutions that deliver immediate ROI with proven interoperability and industry-leading performance and scalability.</li>
+										<li>Focused on ensuring our customer's sustainable success with our solutions.</li>
+										<li>Other factors being:</li>
+											<ul><ul>
+											<li>Maximizing ROI with existing assets</li>
+											<li>Higher Profitability</li>
+											<li>Balanced Growth with Controlled Costs</li>
+											<li>Optimized usage of all enterprise resources</li>
+											<li>Easy Extensibility to Partners</li>
+											</ul></ul>
+										</ul>
+										<ul class="actions">
+											<li><a href="http://www.fiorano.com/customers/customers.php" class="button">Learn more</a></li>
+											<li><a href="http://www.fiorano.com/company/company_contact.php" class="button">Contact Us</a></li>
+										</ul>
+									</div>
+								
+								</div>
+							</div>
+					</section>
+								
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; 2016 Fiorano Software and affiliates. All rights reserved.</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="index_files/assets/js/jquery.min.js"></script>
+			<script src="index_files/assets/js/jquery.scrollex.min.js"></script>
+			<script src="index_files/assets/js/jquery.scrolly.min.js"></script>
+			<script src="index_files/assets/js/skel.min.js"></script>
+			<script src="index_files/assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="index_files/assets/js/main.js"></script>
+
+	</body>
+</html>
