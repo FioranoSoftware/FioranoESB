@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--
+        Copyright (c) Fiorano Software Pte. Ltd. and affiliates. All rights reserved. http://www.fiorano.com
+        The software in this package is published under the terms of the CPAL v1.0
+        license, a copy of which has been included with this distribution in the
+        LICENSE.txt file.
+        -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.fiorano.openesb</groupId>
+    <artifactId>OpenESBProject</artifactId>
+    <version>0.1.0</version>
+    <modules>
+        <module>utils</module>
+        <module>events</module>
+        <module>security</module>
+        <module>transport-api</module>
+        <module>activemq-transport</module>
+        <module>route-api</module>
+        <module>jms-route</module>
+        <module>microservice</module>
+        <module>application-repo</module>
+        <module>namedconfiguration</module>
+        <module>applicationcontroller</module>
+        <module>schema-repo</module>
+        <module>rmi-connector</module>
+        <module>fiorano-openesb-amq-feature</module>
+        <module>management</module>
+        <module>tools</module>
+        <!--<module>fmq-transport</module>-->
+    </modules>
+    <packaging>pom</packaging>
+    <properties>
+        <project.version>0.1.0</project.version>
+    </properties>
+    <name>OpenESBProject</name>
+    <description>OpenESBProject</description>
+    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform</url>
+    <licenses>
+        <license>
+            <name>CPAL, Version 1.0</name>
+            <url>http://www.fiorano.com/products/opensource/esb-core/license.php</url>
+        </license>
+    </licenses>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.karaf.jaas</groupId>
+            <artifactId>org.apache.karaf.jaas.config</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.jaas</groupId>
+            <artifactId>org.apache.karaf.jaas.modules</artifactId>
+            <version>2.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.6</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <version>4.0.3</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+
+                <configuration>
+                    <startLevel>50</startLevel>
+                    <aggregateFeatures>true</aggregateFeatures>
+                    <checkDependencyChange>true</checkDependencyChange>
+                    <failOnDependencyChange>false</failOnDependencyChange>
+                    <logDependencyChanges>true</logDependencyChanges>
+                    <overwriteChangedDependencies>true</overwriteChangedDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--
+    Copyright (c) Fiorano Software Pte. Ltd. and affiliates. All rights reserved. http://www.fiorano.com
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+    -->
+    <parent>
+        <artifactId>OpenESBProject</artifactId>
+        <groupId>com.fiorano.openesb</groupId>
+        <version>0.1.0</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>tools</artifactId>
+    <packaging>bundle</packaging>
+
+    <name>Tools Module</name>
+    <description>
+        Module which provides RMI based tools to interact with server. CLI will be coming soon here.
+    </description>
+    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/tools</url>
+    <licenses>
+        <license>
+            <name>CPAL, Version 1.0</name>
+            <url>http://www.fiorano.com/products/opensource/esb-core/license.php</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <maven-bundle-plugin.version>3.0.0</maven-bundle-plugin.version>
+        <osgi.version>6.0.0</osgi.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+            <version>${osgi.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fiorano.openesb</groupId>
+            <artifactId>rmi-connector</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fiorano.openesb</groupId>
+            <artifactId>application-repo</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fiorano.openesb</groupId>
+            <artifactId>applicationcontroller</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fiorano.openesb</groupId>
+            <artifactId>microservice</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fiorano.openesb</groupId>
+            <artifactId>utils</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <version>${maven-bundle-plugin.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Version>${project.version}</Bundle-Version>
+                        <Bundle-Activator>com.fiorano.openesb.tools.Activator</Bundle-Activator>
+                        <Export-Package>
+                            com.fiorano.openesb.tools*;version=${project.version}
+                        </Export-Package>
+                        <Import-Package>
+                            *
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
