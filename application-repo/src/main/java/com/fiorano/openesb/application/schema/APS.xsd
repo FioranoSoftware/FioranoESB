@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.fiorano.com/dtd2xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.fiorano.com/dtd2xsd">
+    <xsd:element name="Application">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ApplicationHeader"/>
+                <xsd:element ref="ServiceInstances"/>
+                <xsd:element ref="Routes"/>
+                <xsd:element ref="Layout"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ApplicationContext">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Structure"/>
+                <xsd:element ref="DefaultInstance"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ApplicationGUID" type="xsd:string"/>
+    <xsd:element name="ApplicationHeader">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Name"/>
+                <xsd:element ref="ApplicationGUID"/>
+                <xsd:element ref="Author"/>
+                <xsd:element ref="CreationDate"/>
+                <xsd:element ref="Icon"/>
+                <xsd:element ref="Version"/>
+                <xsd:element ref="Label"/>
+                <xsd:element ref="CompatibleWith"/>
+                <xsd:element ref="Category"/>
+                <xsd:element ref="LongDescription"/>
+                <xsd:element ref="ShortDescription"/>
+                <xsd:element ref="Param"/>
+                <xsd:element ref="ApplicationContext"/>
+            </xsd:sequence>
+            <xsd:attribute name="Scope" type="xsd:string" use="required"/>
+            <xsd:attribute name="isSubgraphable" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Author" type="xsd:string"/>
+    <xsd:element name="BufferSizePerPort" type="xsd:string"/>
+    <xsd:element name="Category" type="xsd:string"/>
+    <xsd:element name="CompatibleWith" type="xsd:string"/>
+    <xsd:element name="CreationDate" type="xsd:string"/>
+    <xsd:element name="DefaultInstance">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="Description">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="EventHandler" type="xsd:string"/>
+    <xsd:element name="Icon" type="xsd:string"/>
+    <xsd:element name="InPortInst">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="Description"/>
+                <xsd:element ref="JavaClass"/>
+                <xsd:element ref="Name"/>
+                <xsd:element ref="Param"/>
+                <xsd:element ref="XSD"/>
+            </xsd:choice>
+            <xsd:attribute name="isSyncRequestType" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="JavaClass">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="Label" type="xsd:string"/>
+    <xsd:element name="Layout" type="xsd:string"/>
+    <xsd:element name="LogManager">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="Name"/>
+                <xsd:element minOccurs="1" maxOccurs="unbounded" ref="Param"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LogModules">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="unbounded" ref="Module"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="LongDescription">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="Module">
+        <xsd:complexType>
+            <xsd:attribute name="name" type="xsd:string" use="required"/>
+            <xsd:attribute name="traceLevel" type="xsd:string" fixed="SEVERE"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Name" type="xsd:string"/>
+    <xsd:element name="Node" type="xsd:string"/>
+    <xsd:element name="OutPortInst">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="Description"/>
+                <xsd:element ref="JavaClass"/>
+                <xsd:element ref="Name"/>
+                <xsd:element ref="Param"/>
+                <xsd:element ref="XSD"/>
+            </xsd:choice>
+            <xsd:attribute name="isSyncRequestType" type="xsd:string" fixed="false"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Param" type="xsd:string"/>
+    <xsd:element name="PortInstDescriptor">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="InPortInst"/>
+                <xsd:element ref="OutPortInst"/>
+            </xsd:choice>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="Route">
+        <xsd:complexType>
+            <xsd:choice minOccurs="0" maxOccurs="unbounded">
+                <xsd:element ref="LongDescription"/>
+                <xsd:element ref="Name"/>
+                <xsd:element ref="Param"/>
+                <xsd:element ref="RouteGUID"/>
+                <xsd:element ref="ShortDescription"/>
+                <xsd:element ref="SrcPort"/>
+                <xsd:element ref="SrcServiceInstance"/>
+                <xsd:element ref="TgtPort"/>
+                <xsd:element ref="TgtServiceInstance"/>
+                <xsd:element ref="TimeToLive"/>
+                <xsd:element ref="TransformationXSL"/>
+            </xsd:choice>
+            <xsd:attribute name="applyTransformationAtSrc" type="xsd:string" use="required"/>
+            <xsd:attribute name="isP2PRoute" type="xsd:string" use="required"/>
+            <xsd:attribute name="isPersistant" type="xsd:string" use="required"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="RouteGUID" type="xsd:string"/>
+    <xsd:element name="Routes">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="unbounded" ref="Route"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="RuntimeArguments">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="0" maxOccurs="1" ref="UserDefinedPropertySheet"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ServiceGUID" type="xsd:string"/>
+    <xsd:element name="ServiceInstance">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element ref="ServiceInstanceName"/>
+                <xsd:element ref="ServiceGUID"/>
+                <xsd:element ref="BufferSizePerPort"/>
+                <xsd:element ref="Version"/>
+                <xsd:element ref="Node"/>
+                <xsd:element ref="EventHandler"/>
+                <xsd:element ref="RuntimeArguments"/>
+                <xsd:element ref="PortInstDescriptor"/>
+                <xsd:element ref="LongDescription"/>
+                <xsd:element ref="ShortDescription"/>
+                <xsd:element ref="LogManager"/>
+                <xsd:element minOccurs="1" maxOccurs="unbounded" ref="Param"/>
+                <xsd:element ref="LogModules"/>
+            </xsd:sequence>
+            <xsd:attribute name="debugPort" type="xsd:string" fixed="5000"/>
+            <xsd:attribute name="delayedPort" type="xsd:string" fixed=""/>
+            <xsd:attribute name="isDebugMode" type="xsd:string" fixed="false"/>
+            <xsd:attribute name="isDelayedLaunch" type="xsd:string" fixed="false"/>
+            <xsd:attribute name="isEndOfWorkflow" type="xsd:string" fixed="false"/>
+            <xsd:attribute name="isErrorHandlingEnabled" type="xsd:string" fixed="true"/>
+            <xsd:attribute name="isInMemoryLaunch" type="xsd:string" fixed="false"/>
+            <xsd:attribute name="isManualLaunch" type="xsd:string" fixed="false"/>
+            <xsd:attribute name="isStateful" type="xsd:string" fixed="true"/>
+            <xsd:attribute name="isTransacted" type="xsd:string" fixed="true"/>
+            <xsd:attribute name="killPrimaryOnSecondaryLaunch" type="xsd:string" fixed="true"/>
+            <xsd:attribute name="maxRetries" type="xsd:string" fixed="-1"/>
+            <xsd:attribute name="preferLaunchOnHigherLevelNode" type="xsd:string" fixed="false"/>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ServiceInstanceName" type="xsd:string"/>
+    <xsd:element name="ServiceInstances">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="1" maxOccurs="unbounded" ref="ServiceInstance"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:element name="ShortDescription" type="xsd:string"/>
+    <xsd:element name="SrcPort" type="xsd:string"/>
+    <xsd:element name="SrcServiceInstance" type="xsd:string"/>
+    <xsd:element name="Structure">
+        <xsd:complexType/>
+    </xsd:element>
+    <xsd:element name="TgtPort" type="xsd:string"/>
+    <xsd:element name="TgtServiceInstance" type="xsd:string"/>
+    <xsd:element name="TimeToLive" type="xsd:string"/>
+    <xsd:element name="TransformationXSL" type="xsd:string"/>
+    <xsd:element name="UserDefinedPropertySheet" type="xsd:string"/>
+    <xsd:element name="Version" type="xsd:string"/>
+    <xsd:element name="XSD" type="xsd:string"/>
+</xsd:schema>
