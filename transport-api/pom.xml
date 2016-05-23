@@ -24,7 +24,7 @@
     <description>
         Module which defines communication endpoints and related metadata. A little tightly bound to JMS right now.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/transport-api</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/transport-api</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

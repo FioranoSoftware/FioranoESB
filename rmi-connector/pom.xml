@@ -24,7 +24,7 @@
     <description>
         Encapsultes the RMI interface exposed for tools like eStudio.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/rmi-connector</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/rmi-connector</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

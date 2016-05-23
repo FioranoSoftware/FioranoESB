@@ -25,7 +25,7 @@
         Named Configuration persistence and data models are handled by this bundle.
         Any directory and discovery related APIs can be built on top of this.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/namedconfiguration</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/namedconfiguration</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

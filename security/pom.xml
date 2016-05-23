@@ -25,7 +25,7 @@
     <description>
        Basic Security built on top of Karaf. Will be extended in upcoming releases.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/security</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/security</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

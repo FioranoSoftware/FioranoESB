@@ -24,7 +24,7 @@
     <description>
         Application repository takes care of managing disk level operation of applications. This module can be replaced with shared repository semantics when needed.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/application-repo</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/application-repo</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

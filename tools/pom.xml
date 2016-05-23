@@ -22,7 +22,7 @@
     <description>
         Module which provides RMI based tools to interact with server. CLI will be coming soon here.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/tools</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/tools</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>
