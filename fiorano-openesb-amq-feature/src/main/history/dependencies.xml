@@ -4,6 +4,7 @@
         <feature prerequisite="false" dependency="false">activemq-broker</feature>
         <feature prerequisite="false" dependency="false">cxf-core</feature>
         <feature prerequisite="false" dependency="false">cxf-jaxrs</feature>
+        <feature prerequisite="false" dependency="false">cxf-wsdl</feature>
         <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.6.3</bundle>
         <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.6.3</bundle>
         <bundle>mvn:com.fiorano.openesb/activemq-transport/0.1.0</bundle>
