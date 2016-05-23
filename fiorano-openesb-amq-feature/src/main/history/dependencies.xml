@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.3.0" name="fiorano-openesb-0.1.0">
+    <feature version="0.0.0">
+        <feature prerequisite="false" dependency="false">activemq-broker</feature>
+        <feature prerequisite="false" dependency="false">cxf-core</feature>
+        <feature prerequisite="false" dependency="false">cxf-jaxrs</feature>
+        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-base/2.6.3</bundle>
+        <bundle>mvn:com.fasterxml.jackson.jaxrs/jackson-jaxrs-json-provider/2.6.3</bundle>
+        <bundle>mvn:com.fiorano.openesb/activemq-transport/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/application-repo/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/applicationcontroller/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/events/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/jms-route/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/management/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/microservice/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/namedconfiguration/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/rmi-connector/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/route-api/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/schema-repo/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/security/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/transport-api/0.1.0</bundle>
+        <bundle>mvn:com.fiorano.openesb/utils/0.1.0</bundle>
+        <bundle>mvn:javax.transaction/javax.transaction-api/1.2</bundle>
+        <bundle>mvn:javax.ws.rs/javax.ws.rs-api/2.0</bundle>
+        <bundle>mvn:log4j/log4j/1.2.17</bundle>
+        <bundle>mvn:org.apache.commons/commons-lang3/3.4</bundle>
+        <bundle>mvn:org.apache.cxf/cxf-rt-rs-security-cors/3.1.5</bundle>
+        <bundle>mvn:org.codehaus.woodstox/stax2-api/3.1.4</bundle>
+        <bundle>mvn:org.codehaus.woodstox/woodstox-core-asl/4.4.1</bundle>
+        <bundle>mvn:org.slf4j/slf4j-api/1.6.6</bundle>
+        <bundle>mvn:org.slf4j/slf4j-log4j12/1.6.6</bundle>
+        <bundle>wrap:mvn:com.owlike/genson/1.2$Bundle-SymbolicName=Genson&amp;Bundle-Version=1.2</bundle>
+        <bundle>wrap:mvn:mx4j/mx4j-tools/3.0.1$Bundle-SymbolicName=mx4j&amp;Bundle-Version=3.0.1</bundle>
+        <bundle>wrap:mvn:net.sf.saxon/Saxon-HE/9.7.0-4$Bundle-SymbolicName=SaxonHE&amp;Bundle-Version=9.7</bundle>
+        <bundle>wrap:mvn:oro/oro/2.0.8$Bundle-SymbolicName=JakarthaOro&amp;Bundle-Version=2.0.8</bundle>
+        <bundle>wrap:mvn:woodstox/wstx-asl/2.6$Bundle-SymbolicName=woodstox-asl&amp;Bundle-Version=2.6</bundle>
+        <bundle>wrap:mvn:xml-resolver/xml-resolver/1.2$Bundle-SymbolicName=resolver&amp;Bundle-Version=1.2</bundle>
+        <bundle>wrap:mvn:xmlunit/xmlunit/1.6$Bundle-SymbolicName=xmlunit&amp;Bundle-Version=1.6</bundle>
+    </feature>
+</features>

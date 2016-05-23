@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!--
+    Copyright (c) Fiorano Software Pte. Ltd. and affiliates. All rights reserved. http://www.fiorano.com
+    The software in this package is published under the terms of the CPAL v1.0
+    license, a copy of which has been included with this distribution in the
+    LICENSE.txt file.
+    -->
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.fiorano.openesb</groupId>
+    <version>0.1.0</version>
+
+    <artifactId>fiorano-openesb-fmq</artifactId>
+    <packaging>feature</packaging>
+
+    <name>Fiorano Open ESB FMQ</name>
+    <description>Feature which encapsulates Fiorano Open ESB with FioranoMQ</description>
+    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/fiorano-openesb-fmq-feature</url>
+    <licenses>
+        <license>
+            <name>CPAL, Version 1.0</name>
+            <url>http://www.fiorano.com/products/opensource/esb-core/license.php</url>
+        </license>
+    </licenses>
+
+
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.karaf.tooling</groupId>
+                    <artifactId>karaf-maven-plugin</artifactId>
+                    <version>4.0.3</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+
+                <configuration>
+                    <startLevel>60</startLevel>
+                    <aggregateFeatures>false</aggregateFeatures>
+                    <checkDependencyChange>true</checkDependencyChange>
+                    <failOnDependencyChange>false</failOnDependencyChange>
+                    <logDependencyChanges>true</logDependencyChanges>
+                    <overwriteChangedDependencies>true</overwriteChangedDependencies>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
