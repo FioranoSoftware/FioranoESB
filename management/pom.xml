@@ -25,7 +25,7 @@
     <description>
        Bundle which exposes management related APIs like REST.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/management</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/management</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

@@ -24,7 +24,7 @@
         Bundle which encapsultes the FMQ implementation of Transport API.
         This can be used as template for implementations for other JMS transports.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/fmq-transport</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/fmq-transport</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

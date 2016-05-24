@@ -24,7 +24,7 @@
     <description>
         Events module encapsulates the events that are generated from the server which are used by orchestration or monitoring tools.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/events</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/events</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

@@ -25,7 +25,7 @@
        Route API is generic communication model between two ports of a microservice.
        It could be implemented using any protocol, preferably which can hold long living connections.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/route-api</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/route-api</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

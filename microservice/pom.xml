@@ -23,7 +23,7 @@
     <description>
         Responsible for Microservice lifecycle as well as communication with server. Repository management might get its own bundle in future.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/microservice</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/microservice</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

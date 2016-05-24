@@ -24,7 +24,7 @@
     <description>
         Application controller takes care of in-memory operations on applications and persists them using Application Repository.
     </description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/applicationcontroller</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/applicationcontroller</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

@@ -20,7 +20,7 @@
 
     <name>ActiveMQ transport Bundle</name>
     <description>ActiveMQ Implementation of Transport API. Not needed if any other transport is used.</description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/activemq-transport</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/activemq-transport</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>

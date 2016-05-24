@@ -17,7 +17,7 @@
 
     <name>Fiorano Open ESB FMQ</name>
     <description>Feature which encapsulates Fiorano Open ESB with FioranoMQ</description>
-    <url>https://github.com/FioranoSoftware/Fiorano-Open-ESB-Platform/fiorano-openesb-fmq-feature</url>
+    <url>https://github.com/FioranoSoftware/Fiorano-OpenESB/tree/master/fiorano-openesb-fmq-feature</url>
     <licenses>
         <license>
             <name>CPAL, Version 1.0</name>
