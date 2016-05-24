@@ -20,14 +20,12 @@ Fiorano OpenESB enables application integration by choreographing Microservices 
 Fiorano OpenESB is bundled with a Microservices toolkit that enables the development of JMS-compliant Microservices in a number of supported languages including Java, C, C++ and C#.  
 See [Fiorano Microservices Tookit](https://github.com/FioranoSoftware/Fiorano-Microservice-Toolkit) for more info regarding the microservices.
 
-Fiorano's OpenESB uses 
-
 ##Getting Started##
 
-Refer to the [Quick Start Guide](http://fiorano.com/documentation/display/OSE/Quick+Start+Guide).
+Refer to the [Quick Start Guide](http://fiorano.com/documentation/display/OSE/Quick+Start+Guide) to get started in hardly ten minutes.
 
 ##Documentation##
-refer to http://fiorano.com/documentation/display/OSE/Fiorano+OpenESB+Platform for our comprehensive Open Source documentation including details such as system requirements to install Fiorano OpenESB, features of Fiorano OpenESB, difference between the open source version and commercial version.
+Refer to http://fiorano.com/documentation/display/OSE/Fiorano+OpenESB+Platform for our comprehensive Open Source documentation including details such as system requirements to install Fiorano OpenESB, features of Fiorano OpenESB, difference between the open source version and commercial version.
 
 ##Contributing##
 To contribute:
@@ -41,4 +39,4 @@ Refer to http://fiorano.com/documentation/display/OSE/Contributing page to know 
 ##Keep in Touch##
 Interact with us using the [Fiorano Forum](http://www.fiorano.com/opensource/forum/)
 
-You may also send mail to opensource@fiorano.com to know more.
+You may also send mail to opensource@fiorano.com for your queries or to know more.
