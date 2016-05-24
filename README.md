@@ -15,7 +15,12 @@
 
 ##Welcome to Fiorano OpenESB##
 
-Fiorano's OpenESB provides life cycle management of microservices, microservice flows and automates communication between microservices using any JMS provider.
+Fiorano OpenESB enables application integration by choreographing Microservices into asynchronous flows via the Fiorano Studio and associated tools. The Component Control Protocol (CCP), a wire-level protocol, allows the asynchronous communication between the Open ESB server and micro services being choreographed/orchestrated into application flows. The transport is pluggable and any available JMS engine may be used such as Apache ActiveMQ, JBOSS, TIBCO, IBM, RabbitMQ and FioranoMQ.
+
+Fiorano OpenESB is bundled with a Microservices toolkit that enables the development of JMS-compliant Microservices in a number of supported languages including Java, C, C++ and C#.  
+See [Fiorano Microservices Tookit](https://github.com/FioranoSoftware/Fiorano-Microservice-Toolkit) for more info regarding the microservices.
+
+Fiorano's OpenESB uses 
 
 ##Getting Started##
 
@@ -30,27 +35,8 @@ To contribute:
 * Commit your changes
 * Push to the branch
 * Create Pull Request   
- 
 
 Refer to http://fiorano.com/documentation/display/OSE/Contributing page to know more.
-
-###Writing Guidelines###
-Please follow these guidelines:
-* Use simple words, and frame crisp and clear sentences 
-* Use Active Voice; use Passive Voice sparingly
-* Start with a Caital letter and end with a period (full stop).
-* Expand/explain an abbreviation/jargon in its first occurance
-* Rephrase ambiguous sentences, for example,  
-  - avoid using the third person like 'it' and 'this.'  
-  - replace words like 'appropriately' with a proper explanation
-  - give more examples to replace 'etc'  
-* Use *Bold* formatting to represent buttons
-* Omit 'on' in 'Click on' a button. 
-* While referring to UI names, use the words as it is; Title case is apt for UI elements unless it is a long sentence.
-* Use italics for a jargon, and use single quotes (for a word or two) and double quotes (for a sentence) to mark emphasis.
-* Provide codes in writing (type the text) than attaching image/screenshot unless it refers to something specific.
-* Use monospaced fonts to represent codes/scripts, ideally Courrier New.
-* Review and revise/edit before saving
 
 ##Keep in Touch##
 Interact with us using the [Fiorano Forum](http://www.fiorano.com/opensource/forum/)
