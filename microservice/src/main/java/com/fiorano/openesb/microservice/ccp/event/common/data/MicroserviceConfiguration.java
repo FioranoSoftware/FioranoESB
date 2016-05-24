@@ -25,12 +25,16 @@ public class MicroserviceConfiguration extends Data {
 
     @Override
     public void fromMessage(BytesMessage bytesMessage) throws JMSException {
-       configuration =  bytesMessage.readUTF();
+        byte[] byteArray = new byte[bytesMessage.readInt()];
+        bytesMessage.readBytes(byteArray);
+        configuration =  new String(byteArray);
     }
 
     @Override
     public void toMessage(BytesMessage bytesMessage) throws JMSException {
-        bytesMessage.writeUTF(configuration);
+        byte[] byteArray = configuration.getBytes();
+        bytesMessage.writeInt(byteArray.length);
+        bytesMessage.writeBytes(byteArray);
     }
 
     @Override
