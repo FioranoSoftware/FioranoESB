@@ -389,21 +389,34 @@ public class ApplicationHandle {
     public void stopAllRoutes() {
         for (String routeName : routeMap.keySet()) {
             try {
-                Route route = routeMap.get(routeName);
-                route.stop();
-                routeMap.remove(routeName);
+                stopRoute(routeMap.remove(routeName));
             } catch (Exception e) {
                 logger.error("Error occurred while stopping the route: " + routeName + " of Application: " + appGUID + ":" + version, e);
             }
         }
         for (String bpRouteName : breakPointRoutes.keySet()) {
             try {
-                Route route = routeMap.get(bpRouteName);
-                route.stop();
-                breakPointRoutes.remove(bpRouteName);
+                stopRoute(breakPointRoutes.remove(bpRouteName));
             } catch (Exception e) {
                 logger.error("Error occurred while stopping the breakpoint route: " + bpRouteName + " of Application: " + appGUID + ":" + version, e);
             }
+        }
+    }
+
+    public void stopRoute(Route route) throws Exception {
+        if(route!=null){
+            route.stop();
+        }
+    }
+
+    public void stopRoute(String routeName) throws Exception {
+        Route route = routeMap.get(routeName);
+        if(route!=null){
+            route.stop();
+        }
+        route = breakPointRoutes.get(routeName);
+        if(route!=null){
+            route.stop();
         }
     }
 
@@ -636,13 +649,17 @@ public class ApplicationHandle {
         String bpSourceDestName = getBPSourceDestName(routeName);
         String bpTargetdDestName = getBPTargetDestinationName(routeName);
         Route routeToC = breakPointRoutes.remove(bpSourceDestName);
-        routeToC.stop();
+        if(routeToC!=null){
+            routeToC.stop();
+        }
         JMSPortConfiguration portConfiguration = new JMSPortConfiguration();
         portConfiguration.setPortType(JMSPortConfiguration.PortType.QUEUE);
         portConfiguration.setName(bpSourceDestName);
         transport.disablePort(portConfiguration);
         Route routeFromD = breakPointRoutes.remove(bpTargetdDestName);
-        routeFromD.stop();
+        if(routeFromD!=null){
+            routeFromD.stop();
+        }
         portConfiguration.setName(bpTargetdDestName);
         transport.disablePort(portConfiguration);
         breakpoints.remove(routeName);
@@ -719,6 +736,10 @@ public class ApplicationHandle {
         }
     }
 
+    public void setLogLevel(String microServiceName, HashMap<String,String> modules) throws Exception {
+        MicroServiceRuntimeHandle handle = microServiceHandleList.get(microServiceName);
+        handle.setLogLevel(modules);
+    }
     public String getLaunchMode(String name) {
         return isMicroserviceRunning(name) ? microServiceHandleList.get(name).getLaunchMode().name() : "Not Running";
     }
@@ -902,8 +923,10 @@ public class ApplicationHandle {
                 toDelete.add(routeName);
         for (String routeName : toDelete) {
             Route route = routeMap.remove(routeName);
-            route.stop();
-            route.delete();
+            if(route!=null){
+                route.stop();
+                route.delete();
+            }
         }
     }
 

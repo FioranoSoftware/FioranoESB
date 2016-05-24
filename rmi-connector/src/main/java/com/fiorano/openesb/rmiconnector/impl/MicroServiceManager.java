@@ -758,13 +758,14 @@ public class MicroServiceManager extends AbstractRmiManager implements IServiceM
 
     public void stopAllOtherDependentServices(String serviceGUID, String version) throws FioranoException {
         HashMap<String, ArrayList<String>> directDependencyMap = new HashMap<String, ArrayList<String>>();    // Key : componentGUID , Value : List of all the components which depends directly on component with GUID as componentGUID
-        Enumeration componentList = microServiceRepository.getAllServicesInRepository();
+        Enumeration<Service> componentList = microServiceRepository.getAllServicesInRepository();
 
         // The while loop iterates over all the components in peer repository . The component entry is added in the directDependencyMap in the lists corresponding to each of its service references.
         while (componentList.hasMoreElements()) {
-            String componentGUID = (String) componentList.nextElement();
-            int index = componentGUID.lastIndexOf('_');
-            List serviceRefList = microServiceRepository.getServiceInfo(componentGUID.substring(0, index), componentGUID.substring(index + 1)).getDeployment().getServiceRefs();
+            Service service = componentList.nextElement();
+            String componentGUID = service.getGUID();
+            float componenetVersion = service.getVersion();
+            List serviceRefList = microServiceRepository.getServiceInfo(componentGUID, String.valueOf(componenetVersion)).getDeployment().getServiceRefs();
             Iterator itr = serviceRefList.iterator();
             // Go to List corresponding to each serviceRef and add the component in the list if its already not there
             while (itr.hasNext()) {
@@ -775,11 +776,11 @@ public class MicroServiceManager extends AbstractRmiManager implements IServiceM
                 ArrayList<String> list = directDependencyMap.get(serviceRefGUID + "_" + serviceRefVersion);
                 if (list == null) {
                     list = new ArrayList<String>();
-                    list.add(componentGUID);
+                    list.add(componentGUID+"_"+componenetVersion);
                     directDependencyMap.put(serviceRefGUID + "_" + serviceRefVersion, list);
                 } else {
                     if (!list.contains(componentGUID))
-                        list.add(componentGUID);
+                        list.add(componentGUID+"_"+componenetVersion);
                 }
             }
         }

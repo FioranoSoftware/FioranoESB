@@ -199,7 +199,7 @@ public class MicroServiceRepoManager {
      *
      * @return Enumeration of ServicePropertySheet objects
      */
-    public Enumeration getAllServicesInRepository() {
+    public Enumeration<Service> getAllServicesInRepository() {
         synchronized (waitObject) {
             try {
                 if (msRepoInSync)

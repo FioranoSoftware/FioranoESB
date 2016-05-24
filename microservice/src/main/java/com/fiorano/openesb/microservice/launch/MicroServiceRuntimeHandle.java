@@ -132,7 +132,7 @@ public abstract class MicroServiceRuntimeHandle {
 
     protected abstract   void kill() throws Exception;
 
-    protected abstract void setLogLevel(Map<String, String> modules) throws Exception;
+    public abstract void setLogLevel(Map<String, String> modules) throws Exception;
 
     public abstract ComponentStats getComponentStats() throws FioranoException;
 
