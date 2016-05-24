@@ -20,7 +20,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -35,8 +37,6 @@ public class ApplicationLogManager {
 
     private CCPEventManager ccpEventManager;
 
-    public static final String SERVICE_LOG_DIR_NAME = "log";
-
     ApplicationLogManager(ApplicationController applicationController, CCPEventManager ccpEventManager){
         this.applicationController = applicationController;
         this.ccpEventManager = ccpEventManager;
@@ -50,9 +50,18 @@ public class ApplicationLogManager {
         boolean completed = false;
         if (applicationLogMap.get(eventProcessKey) == null) {
             File tempdir;
-            File path = new File(ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
-                    +File.separator+version);
-            if(!path.exists()) {
+            List<ServiceInstance> serviceInstances = applicationController.getSavedApplication(appGUID, version).getServiceInstances();
+            List<File> pathListFiles = new ArrayList<>();
+            for(ServiceInstance serviceInstance : serviceInstances){
+                String logDir = applicationController.getSavedApplication(appGUID, version).getServiceInstance(serviceInstance.getName()).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+                File path = new File(ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
+                        +File.separator+version+File.separator+serviceInstance.getName().toUpperCase());
+                if(path.exists()) {
+                    pathListFiles.add(path);
+                }
+            }
+
+            if(pathListFiles.isEmpty()) {
                 throw new FioranoException("Logs are empty");
             }
             tempdir = FileUtil.findFreeFile(FileUtil.TEMP_DIR, "applicationlogs", "tmp");
@@ -60,28 +69,24 @@ public class ApplicationLogManager {
             if(!mkdir){
                 logger.trace("Could not create dir " + tempdir.getAbsolutePath());
             }
-            tempZipFile = FileUtil.findFreeFile(FileUtil.TEMP_DIR ,appGUID+"__"+version + SERVICE_LOG_DIR_NAME, "zip");
-            try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempZipFile))){
+            tempZipFile = FileUtil.findFreeFile(FileUtil.TEMP_DIR ,appGUID+"__"+version + "logs", "zip");
+            try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(tempZipFile))) {
                 ZipEntry e;
-                File[] pathListFiles = path.listFiles();
-                if (pathListFiles != null) {
-                    for(File service : pathListFiles){
-                        File[] serviceListFiles = service.listFiles();
-                        if (serviceListFiles != null) {
-                            for(File f : serviceListFiles){
-                                if(f.getName().endsWith("lck")){
-                                    continue;
-                                }
-                                e = new ZipEntry(f.getName());
-                                out.putNextEntry(e);
+                for (File service : pathListFiles) {
+                    File[] serviceListFiles = service.listFiles();
+                    if (serviceListFiles != null) {
+                        for (File f : serviceListFiles) {
+                            if (f.getName().endsWith("lck")) {
+                                continue;
+                            }
+                            e = new ZipEntry(f.getName());
+                            out.putNextEntry(e);
 
-                                byte[] buffer = new byte[4092];
-                                int byteCount;
-                                fis = new FileInputStream(f);
-                                while ((byteCount = fis.read(buffer)) != -1)
-                                {
-                                    out.write(buffer, 0, byteCount);
-                                }
+                            byte[] buffer = new byte[4092];
+                            int byteCount;
+                            fis = new FileInputStream(f);
+                            while ((byteCount = fis.read(buffer)) != -1) {
+                                out.write(buffer, 0, byteCount);
                             }
                         }
                     }
@@ -98,11 +103,6 @@ public class ApplicationLogManager {
                     }
                 }
                 FileUtil.deleteDir(tempdir);
-                applicationLogMap.remove(eventProcessKey);
-                boolean delete = tempZipFile.delete();
-                if(!delete){
-                    logger.trace("Could not delete file " + tempZipFile.getAbsolutePath());
-                }
             }
         } else {
             tempZipFile = applicationLogMap.get(eventProcessKey);
@@ -143,9 +143,10 @@ public class ApplicationLogManager {
         File tempZipFile;
         FileInputStream fis= null;
         boolean completed = false;
+        String logDir = applicationController.getSavedApplication(appGUID, version).getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
         if (applicationLogMap.get(serviceKey) == null) {
             File tempdir = null;
-            File path = new File(ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
+            File path = new File(ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
                     +File.separator+version+File.separator+serviceInst.toUpperCase());
             tempZipFile = FileUtil.findFreeFile(FileUtil.TEMP_DIR ,serviceKey, "zip");
             if(!path.exists()) {
@@ -190,11 +191,6 @@ public class ApplicationLogManager {
                 }
                 if (tempdir != null)
                     FileUtil.deleteDir(tempdir);
-                applicationLogMap.remove(serviceKey);
-                boolean delete = tempZipFile.delete();
-                if(!delete){
-                    logger.trace("Could not delete file " + tempZipFile.getAbsolutePath());
-                }
             }
         } else {
             tempZipFile = applicationLogMap.get(serviceKey);
@@ -235,8 +231,8 @@ public class ApplicationLogManager {
     }
 
     public String getLastOutTrace(int numberOfLines, String serviceName, String appGUID, float appVersion) throws FioranoException {
-        //todo: remove hardcoded service logs path.
-        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
+        String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceName).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
                 +File.separator+appVersion+File.separator+serviceName.toUpperCase();
         File f = new File(path);
         if(!f.exists()){
@@ -272,8 +268,8 @@ public class ApplicationLogManager {
     }
 
     public String getLastErrTrace(int numberOfLines, String serviceName, String appGUID, float appVersion) throws FioranoException{
-        //todo: remove hardcoded service logs path.
-        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
+        String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceName).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
                 +File.separator+appVersion+File.separator+serviceName.toUpperCase();
         File f = new File(path);
         if(!f.exists()){
@@ -320,8 +316,8 @@ public class ApplicationLogManager {
             }
             return;
         }
-        //todo: remove hardcoded service logs path.
-        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
+        String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
                 +File.separator+appVersion+File.separator+serviceInst.toUpperCase();
         File f = new File(path);
         if(!f.exists()){
@@ -352,8 +348,8 @@ public class ApplicationLogManager {
             }
             return;
         }
-        //todo: remove hardcoded service logs path.
-        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
+        String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
                 +File.separator+appVersion+File.separator+serviceInst.toUpperCase();
         File f = new File(path);
         if(!f.exists()){
@@ -396,8 +392,8 @@ public class ApplicationLogManager {
                 }
                 continue;
             }
-            //todo: remove hardcoded service logs path.
-            String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+SERVICE_LOG_DIR_NAME+File.separator+appGUID.toUpperCase()
+            String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+            String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
                     +File.separator+appVersion+File.separator+serviceInst.toUpperCase();
             File f = new File(path);
             if(!f.exists()){
