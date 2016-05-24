@@ -719,6 +719,10 @@ public class ApplicationHandle {
         }
     }
 
+    public void setLogLevel(String microServiceName, HashMap<String,String> modules) throws Exception {
+        MicroServiceRuntimeHandle handle = microServiceHandleList.get(microServiceName);
+        handle.setLogLevel(modules);
+    }
     public String getLaunchMode(String name) {
         return isMicroserviceRunning(name) ? microServiceHandleList.get(name).getLaunchMode().name() : "Not Running";
     }

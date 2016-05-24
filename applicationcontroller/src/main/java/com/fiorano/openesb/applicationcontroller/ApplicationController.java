@@ -1216,6 +1216,10 @@ public class ApplicationController {
         return chainLaunchHelper.isApplicationReferred(appGUID, appVersion);
     }
 
+    public void setLogLevel(String appGUID, float appVersion, String serviceInstName, Hashtable<String,String> modules, String handleId) throws Exception {
+        getApplicationHandle(appGUID, appVersion).setLogLevel(serviceInstName, new HashMap<>(modules));
+    }
+
      /*----------------------start of [Application Restore Thread]----------------------------------------*/
 
     private class RestoreAppState extends Thread {

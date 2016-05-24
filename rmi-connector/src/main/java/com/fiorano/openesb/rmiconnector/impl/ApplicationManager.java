@@ -1244,7 +1244,11 @@ public class ApplicationManager extends AbstractRmiManager implements IApplicati
 
     @Override
     public void setLogLevel(String appGUID, float appVersion, String serviceInstName, Hashtable modules) throws RemoteException, ServiceException {
-
+        try {
+            applicationController.setLogLevel(appGUID, appVersion, serviceInstName, modules, handleId);
+        } catch (Exception e) {
+            throw new ServiceException(e.getMessage());
+        }
     }
 
     @Override
