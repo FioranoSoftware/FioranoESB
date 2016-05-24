@@ -26,13 +26,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class CCPCommandHelper {
 
-    private Map<String, String> logLevels;
+    private Map<String, String> logLevels = new HashMap<>();
     private CCPEventManager.CCPEventGenerator ccpEventGenerator;
     private CCPEventManager ccpEventManager;
     private String componentId;
@@ -56,7 +55,8 @@ public class CCPCommandHelper {
     public void setLogLevel(Map<String, String> modules) throws Exception {
         Map<String, String> modified = new HashMap<String, String>();
         for (Map.Entry<String, String> module : modules.entrySet()) {
-            if (!logLevels.get(module.getKey()).equalsIgnoreCase(module.getValue()))
+            String s = logLevels.get(module.getKey());
+            if (s== null || !s.equalsIgnoreCase(module.getValue()))
                 modified.put(module.getKey(), module.getValue());
         }
 
