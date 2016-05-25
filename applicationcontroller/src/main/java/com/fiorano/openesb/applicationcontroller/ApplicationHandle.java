@@ -900,8 +900,8 @@ public class ApplicationHandle {
                 //delete ports
                 disableServicePorts(serviceInstance);
                 //delete logs
-                applicationController.getApplicationLogManager().clearServiceOutLogs(killcomp, appGUID, version);
-                applicationController.getApplicationLogManager().clearServiceErrLogs(killcomp, appGUID, version);
+                applicationController.getApplicationLogManager().clearServiceOutLogs(killcomp, oldApp);
+                applicationController.getApplicationLogManager().clearServiceErrLogs(killcomp, oldApp);
             } catch (Exception e) {
                 logger.error("error occured while stopping the component " + killcomp + "of Application " + appGUID + ":" + version);
             }

@@ -225,8 +225,8 @@ public class ApplicationLogManager {
 
     public void deleteLogs(Application application, Vector<String> components) throws FioranoException {
         for(String deletedComponent: components){
-            clearServiceErrLogs(deletedComponent, application.getGUID(), application.getVersion());
-            clearServiceOutLogs(deletedComponent, application.getGUID(), application.getVersion());
+            clearServiceErrLogs(deletedComponent, application);
+            clearServiceOutLogs(deletedComponent, application);
         }
     }
 
@@ -303,22 +303,10 @@ public class ApplicationLogManager {
         }
         return sb.toString();
     }
-
-    public void clearServiceOutLogs(String serviceInst, String appGUID, float appVersion) throws FioranoException {
-        if(applicationController.isServiceRunning(appGUID, appVersion, serviceInst)){
-            CommandEvent commandEvent = new CommandEvent();
-            commandEvent.setCommand(CommandEvent.Command.CLEAR_OUT_LOGS);
-            try {
-                ccpEventManager.getCcpEventGenerator().sendEvent(commandEvent, LookUpUtil.getServiceInstanceLookupName(appGUID, appVersion, serviceInst));
-            } catch (Exception e) {
-                logger.error("Error occurred while sending 'clear out logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion);
-                throw new FioranoException("Error occurred while sending 'clear out logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion, e);
-            }
-            return;
-        }
-        String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
-        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
-                +File.separator+appVersion+File.separator+serviceInst.toUpperCase();
+    public void clearServiceOutLogs(String serviceInst, Application application) throws FioranoException {
+        String logDir = application.getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+application.getGUID().toUpperCase()
+                +File.separator+application.getVersion()+File.separator+serviceInst.toUpperCase();
         File f = new File(path);
         if(!f.exists()){
             return;
@@ -336,21 +324,25 @@ public class ApplicationLogManager {
         }
     }
 
-    public void clearServiceErrLogs(String serviceInst, String appGUID, float appVersion) throws FioranoException {
+    public void clearServiceOutLogs(String serviceInst, String appGUID, float appVersion) throws FioranoException {
         if(applicationController.isServiceRunning(appGUID, appVersion, serviceInst)){
             CommandEvent commandEvent = new CommandEvent();
-            commandEvent.setCommand(CommandEvent.Command.CLEAR_ERR_LOGS);
+            commandEvent.setCommand(CommandEvent.Command.CLEAR_OUT_LOGS);
             try {
                 ccpEventManager.getCcpEventGenerator().sendEvent(commandEvent, LookUpUtil.getServiceInstanceLookupName(appGUID, appVersion, serviceInst));
             } catch (Exception e) {
-                logger.error("Error occurred while sending 'clear error logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion);
-                throw new FioranoException("Error occurred while sending 'clear error logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion, e);
+                logger.error("Error occurred while sending 'clear out logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion);
+                throw new FioranoException("Error occurred while sending 'clear out logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion, e);
             }
             return;
         }
-        String logDir = applicationController.getSavedApplication(appGUID, appVersion).getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
-        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+appGUID.toUpperCase()
-                +File.separator+appVersion+File.separator+serviceInst.toUpperCase();
+        clearServiceOutLogs(serviceInst,applicationController.getSavedApplication(appGUID,appVersion));
+    }
+
+    public void clearServiceErrLogs(String serviceInst, Application application) throws FioranoException {
+        String logDir = application.getServiceInstance(serviceInst).getLogManager().getProps().getProperty("java.util.logging.FileHandler.dir");
+        String path = ServerConfig.getConfig().getRuntimeDataPath()+File.separator+logDir+File.separator+application.getGUID().toUpperCase()
+                +File.separator+application.getVersion()+File.separator+serviceInst.toUpperCase();
         File f = new File(path);
         if(!f.exists()){
             return;
@@ -367,6 +359,21 @@ public class ApplicationLogManager {
                 }
             }
         }
+    }
+
+    public void clearServiceErrLogs(String serviceInst, String appGUID, float appVersion) throws FioranoException {
+        if(applicationController.isServiceRunning(appGUID, appVersion, serviceInst)){
+            CommandEvent commandEvent = new CommandEvent();
+            commandEvent.setCommand(CommandEvent.Command.CLEAR_ERR_LOGS);
+            try {
+                ccpEventManager.getCcpEventGenerator().sendEvent(commandEvent, LookUpUtil.getServiceInstanceLookupName(appGUID, appVersion, serviceInst));
+            } catch (Exception e) {
+                logger.error("Error occurred while sending 'clear error logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion);
+                throw new FioranoException("Error occurred while sending 'clear error logs' command to service " + serviceInst + "of Application "+appGUID+":"+appVersion, e);
+            }
+            return;
+        }
+        clearServiceErrLogs(serviceInst, applicationController.getSavedApplication(appGUID, appVersion));
     }
 
     public void clearApplicationLogs(String appGUID, float appVersion) throws FioranoException {
