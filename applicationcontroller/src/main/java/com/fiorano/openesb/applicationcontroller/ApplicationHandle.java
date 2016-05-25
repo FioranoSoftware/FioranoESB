@@ -688,11 +688,13 @@ public class ApplicationHandle {
         }
         logger.info("Starting MicroService: " + microServiceName + " of Application " + appGUID + ":" + version);
         TransportConfig transportConfig = TransportConfig.getInstance();
+        String instanceValue = (String) instance.getRuntimeArgument("JAVA_HOME").getValue();
+        String value =  instanceValue != null ? instanceValue : transportConfig.getValue(LaunchConstants.USER_DEFINED_JAVA_HOME);
         JavaLaunchConfiguration javaLaunchConfiguration = new JavaLaunchConfiguration(instance.isDebugMode(),
                 instance.getDebugPort(), transportConfig.getProviderURL(), MicroServiceRepoManager.getInstance().getRepositoryLocation(), ServerConfig.getConfig().getRepositoryPath() + File.separator + SchemaRepoConstants.SCHEMA_REPOSITORY_NAME,
                 ServerConfig.getConfig().getJettyUrl(), ServerConfig.getConfig().getJettySSLUrl(),
                 Boolean.valueOf(transportConfig.getValue("WatchForControlEvents")), transportConfig.getValue("MS_JAVA_HOME"),
-                transportConfig.getValue(LaunchConstants.USER_DEFINED_JAVA_HOME), transportConfig.getValue("java.naming.factory.initial"));
+                value, transportConfig.getValue("java.naming.factory.initial"));
         MicroServiceLaunchConfiguration mslc = new MicroServiceLaunchConfiguration(application.getGUID(), String.valueOf(application.getVersion()), transportConfig.getUserName(), transportConfig.getPassword(), instance, javaLaunchConfiguration);
         try {
             microServiceHandleList.put(microServiceName, service.launch(mslc, instance.getConfiguration()));

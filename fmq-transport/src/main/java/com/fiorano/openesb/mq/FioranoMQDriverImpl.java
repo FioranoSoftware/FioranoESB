@@ -28,14 +28,13 @@ public class FioranoMQDriverImpl implements MQDriver {
 
     public FioranoMQDriverImpl(Properties properties) throws Exception {
         this.properties = properties;
-        logger = LoggerFactory.getILoggerFactory().getLogger(Activator.class.getName());
+        logger = LoggerFactory.getLogger(Activator.class.getName());
         ic = new InitialContext(properties);
         logger.info("Created Initial Context :: " + ic);
         MQAdminConnectionFactory acf = (MQAdminConnectionFactory) ic.lookup(properties.getProperty("fiorano.acf.name"));
         ac = acf.createMQAdminConnection(properties.getProperty(Context.SECURITY_PRINCIPAL), properties.getProperty(Context.SECURITY_CREDENTIALS));
         logger.info("Created Admin Connection :: " + ac);
         adminService = ac.getMQAdminService();
-
     }
 
     public void deleteDestination(String name, String type) throws Exception {
@@ -50,7 +49,7 @@ public class FioranoMQDriverImpl implements MQDriver {
         UnifiedConnectionFactoryMetaData unifiedConnectionFactoryMetaData = new UnifiedConnectionFactoryMetaData();
         unifiedConnectionFactoryMetaData.setName(name);
         unifiedConnectionFactoryMetaData.setDescription(name + " created by Fiorano Open ESB");
-        unifiedConnectionFactoryMetaData.setConnectURL(properties.getProperty("provider.url"));
+        unifiedConnectionFactoryMetaData.setConnectURL(properties.getProperty("providerURL"));
         try {
             adminService.createConnectionFactory(unifiedConnectionFactoryMetaData);
         } catch (Exception e) {
