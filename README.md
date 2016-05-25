@@ -25,7 +25,7 @@ See [Fiorano Microservices Tookit](https://github.com/FioranoSoftware/Fiorano-Mi
 Refer to the [Quick Start Guide](http://fiorano.com/documentation/display/OSE/Quick+Start+Guide) to get started in hardly ten minutes.
 
 ##Documentation##
-Refer to http://fiorano.com/documentation/display/OSE/Fiorano+OpenESB+Platform for our comprehensive Open Source documentation including details such as system requirements to install Fiorano OpenESB, features of Fiorano OpenESB, difference between the open source version and commercial version.
+Refer to http://fiorano.com/documentation/display/OSE/Fiorano+ESB+Platform for our comprehensive Open Source documentation including details such as system requirements to install Fiorano ESB, features of Fiorano ESB, difference between the open source version and commercial version.
 
 ##Contributing##
 To contribute:
