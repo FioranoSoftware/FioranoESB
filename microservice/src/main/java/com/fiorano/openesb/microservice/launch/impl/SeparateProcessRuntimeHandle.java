@@ -205,7 +205,9 @@ public class SeparateProcessRuntimeHandle extends MicroServiceRuntimeHandle {
     }
 
     protected void waitFor() throws InterruptedException {
-        osProcess.waitFor();
+        if(osProcess!=null){
+            osProcess.waitFor();
+        }
     }
 
     private void cleanupComponentResources(boolean userAction, boolean shutdownComponentProcess, String reason) throws FioranoException {

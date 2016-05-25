@@ -149,11 +149,7 @@ public class ApplicationHandle {
                 if (remoteSourceServiceInstance != null) {
                     String remoteAppGuid = remoteSourceServiceInstance.getApplicationGUID();
                     float remoteAppVersion = remoteSourceServiceInstance.getApplicationVersion();
-                    ApplicationHandle remoteAppHandle = applicationController.getApplicationHandle(remoteAppGuid, remoteAppVersion);
-                    if (remoteAppHandle == null) {
-                        throw new FioranoException("Remote Application not running");
-                    }
-                    Application remoteApplication = remoteAppHandle.getApplication();
+                    Application remoteApplication = applicationController.getSavedApplication(remoteAppGuid, remoteAppVersion);
                     sourceServiceInstance = remoteApplication.getServiceInstance(remoteSourceServiceInstance.getRemoteName());
                     sourcePort = sourceServiceInstance.getOutputPortInstance(sourcePortInstance);
                     if (sourcePort.isSpecifiedDestinationUsed()) {
@@ -186,8 +182,7 @@ public class ApplicationHandle {
                 if (remoteTgtServiceInstance != null) {
                     String remoteAppGuid = remoteTgtServiceInstance.getApplicationGUID();
                     float remoteAppVersion = remoteTgtServiceInstance.getApplicationVersion();
-                    ApplicationHandle remoteAppHandle = applicationController.getApplicationHandle(remoteAppGuid, remoteAppVersion);
-                    Application remoteApplication = remoteAppHandle.getApplication();
+                    Application remoteApplication  = applicationController.getSavedApplication(remoteAppGuid, remoteAppVersion);
                     targetPort = remoteApplication.getServiceInstance(remoteTgtServiceInstance.getRemoteName()).getInputPortInstance(destPortInstance);
                     if (targetPort.isSpecifiedDestinationUsed()) {
                         targetPortName = targetPort.getDestination();
@@ -305,11 +300,7 @@ public class ApplicationHandle {
             if (remoteSourceServiceInstance != null) {
                 String remoteAppGuid = remoteSourceServiceInstance.getApplicationGUID();
                 float remoteAppVersion = remoteSourceServiceInstance.getApplicationVersion();
-                ApplicationHandle remoteAppHandle = applicationController.getApplicationHandle(remoteAppGuid, remoteAppVersion);
-                if (remoteAppHandle == null) {
-                    throw new FioranoException("Remote Application not running");
-                }
-                Application remoteApplication = remoteAppHandle.getApplication();
+                Application remoteApplication = applicationController.getSavedApplication(remoteAppGuid, remoteAppVersion);
                 sourceServiceInstance = remoteApplication.getServiceInstance(remoteSourceServiceInstance.getRemoteName());
                 sourcePort = sourceServiceInstance.getOutputPortInstance(sourcePortInstance);
                 if (sourcePort.isSpecifiedDestinationUsed()) {
@@ -340,11 +331,7 @@ public class ApplicationHandle {
             if (remoteTgtServiceInstance != null) {
                 String remoteAppGuid = remoteTgtServiceInstance.getApplicationGUID();
                 float remoteAppVersion = remoteTgtServiceInstance.getApplicationVersion();
-                ApplicationHandle remoteAppHandle = applicationController.getApplicationHandle(remoteAppGuid, remoteAppVersion);
-                if (remoteAppHandle == null) {
-                    throw new FioranoException("Remote Application not running");
-                }
-                Application remoteApplication = remoteAppHandle.getApplication();
+                Application remoteApplication = applicationController.getSavedApplication(remoteAppGuid, remoteAppVersion);
                 targetPort = remoteApplication.getServiceInstance(remoteTgtServiceInstance.getRemoteName()).getInputPortInstance(destPortInstance);
                 if (targetPort.isSpecifiedDestinationUsed()) {
                     targetPortName = targetPort.getDestination();
@@ -479,11 +466,7 @@ public class ApplicationHandle {
             if (remoteSourceServiceInstance != null) {
                 String remoteAppGuid = remoteSourceServiceInstance.getApplicationGUID();
                 float remoteAppVersion = remoteSourceServiceInstance.getApplicationVersion();
-                ApplicationHandle remoteAppHandle = applicationController.getApplicationHandle(remoteAppGuid, remoteAppVersion);
-                if (remoteAppHandle == null) {
-                    throw new FioranoException("Remote Application not running");
-                }
-                Application remoteApplication = remoteAppHandle.getApplication();
+                Application remoteApplication = applicationController.getSavedApplication(remoteAppGuid, remoteAppVersion);
                 sourceServiceInstance = remoteApplication.getServiceInstance(remoteSourceServiceInstance.getRemoteName());
                 outputPortInstance = sourceServiceInstance.getOutputPortInstance(outPortName);
                 if (outputPortInstance.isSpecifiedDestinationUsed()) {
@@ -583,8 +566,7 @@ public class ApplicationHandle {
             if (remoteTgtServiceInstance != null) {
                 String remoteAppGuid = remoteTgtServiceInstance.getApplicationGUID();
                 float remoteAppVersion = remoteTgtServiceInstance.getApplicationVersion();
-                ApplicationHandle remoteAppHandle = applicationController.getApplicationHandle(remoteAppGuid, remoteAppVersion);
-                Application remoteApplication = remoteAppHandle.getApplication();
+                Application remoteApplication = applicationController.getSavedApplication(remoteAppGuid, remoteAppVersion);
                 inPortInstnace = remoteApplication.getServiceInstance(remoteTgtServiceInstance.getRemoteName()).getInputPortInstance(inPortName);
                 if (inPortInstnace.isSpecifiedDestinationUsed()) {
                     inPortFullName = inPortInstnace.getDestination();
@@ -682,6 +664,9 @@ public class ApplicationHandle {
 
     public void startMicroService(String microServiceName) throws FioranoException {
         ServiceInstance instance = application.getServiceInstance(microServiceName);
+        if(instance==null){
+            return;
+        }
         if (isMicroserviceRunning(microServiceName)) {
             logger.info("MicroService: " + microServiceName + " of Application " + appGUID + ":" + version + " is already running");
             return;
@@ -691,7 +676,7 @@ public class ApplicationHandle {
         String instanceValue = (String) instance.getRuntimeArgument("JAVA_HOME").getValue();
         String value =  instanceValue != null ? instanceValue : transportConfig.getValue(LaunchConstants.USER_DEFINED_JAVA_HOME);
         JavaLaunchConfiguration javaLaunchConfiguration = new JavaLaunchConfiguration(instance.isDebugMode(),
-                instance.getDebugPort(), transportConfig.getProviderURL(), MicroServiceRepoManager.getInstance().getRepositoryLocation(), ServerConfig.getConfig().getRepositoryPath() + File.separator + SchemaRepoConstants.SCHEMA_REPOSITORY_NAME,
+                instance.getDebugPort(), transportConfig.getProviderURL(), System.getProperty("user.dir"), MicroServiceRepoManager.getInstance().getRepositoryLocation(), ServerConfig.getConfig().getRepositoryPath() + File.separator + SchemaRepoConstants.SCHEMA_REPOSITORY_NAME,
                 ServerConfig.getConfig().getJettyUrl(), ServerConfig.getConfig().getJettySSLUrl(),
                 Boolean.valueOf(transportConfig.getValue("WatchForControlEvents")), transportConfig.getValue("MS_JAVA_HOME"),
                 value, transportConfig.getValue("java.naming.factory.initial"));

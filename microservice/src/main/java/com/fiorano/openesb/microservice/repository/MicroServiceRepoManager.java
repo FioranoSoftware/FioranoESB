@@ -14,6 +14,7 @@ import com.fiorano.openesb.events.Event;
 import com.fiorano.openesb.events.MicroServiceRepoUpdateEvent;
 import com.fiorano.openesb.microservice.bundle.Activator;
 import com.fiorano.openesb.microservice.launch.MicroServiceRepoEventRaiser;
+import com.fiorano.openesb.utils.FileUtil;
 import com.fiorano.openesb.utils.exception.FioranoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -1397,7 +1398,7 @@ public class MicroServiceRepoManager {
             //ignore
         }
         try {
-            serviceVersionHome.delete();
+            FileUtil.deleteDir(serviceVersionHome);
             if (serviceVersionHome.getParentFile().list().length == 0)
                 serviceVersionHome.getParentFile().delete();
         } catch (Exception fse) {

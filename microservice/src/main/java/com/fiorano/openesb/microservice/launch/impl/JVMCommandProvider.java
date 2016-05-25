@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 
 public class JVMCommandProvider extends CommandProvider<JavaLaunchConfiguration> {
     private LaunchConfiguration<JavaLaunchConfiguration> launchConfiguration;
-    private static final Map favorites = Collections.singletonMap("FIORANO_HOME", new File(getFioranoHomeDir()));
 
     private String m_componentRepositoryDir;
     private List<String> resourceParents = new ArrayList<>();
@@ -70,8 +69,8 @@ public class JVMCommandProvider extends CommandProvider<JavaLaunchConfiguration>
         command.add(classPath);
     }
 
-    private static String getFioranoHomeDir() {
-        return System.getProperty("user.dir");
+    private String getFioranoHomeDir() {
+        return launchConfiguration.getAdditionalConfiguration().getFioranoHome();
     }
 
     private String getJavaLibraryPath(String executionDir) {
@@ -455,7 +454,7 @@ public class JVMCommandProvider extends CommandProvider<JavaLaunchConfiguration>
                 componentVersion);
 
         String componentBaseDir = m_componentRepositoryDir + File.separator + componentGUID + File.separator + componentVersion;
-
+        Map favorites = Collections.singletonMap("FIORANO_HOME", new File(getFioranoHomeDir()));
         for (Resource resource : componentPS.getDeployment().getResources()) {
             String resc = resource.getName();
             if (resource.isRequiredForExecution()) {
