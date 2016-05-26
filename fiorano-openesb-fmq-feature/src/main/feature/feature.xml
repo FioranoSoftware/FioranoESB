@@ -8,8 +8,9 @@
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
     <feature name='${project.artifactId}' description='${project.name}' version='${project.version}'>
         <details>${project.description}</details>
-        <feature version="3.1.0">cxf-core</feature>
-        <feature version="3.1.0">cxf-jaxrs</feature>
+        <feature prerequisite="true" version="3.1.0">cxf-core</feature>
+        <feature prerequisite="true" version="3.1.0">cxf-jaxrs</feature>
+        <feature prerequisite="true" version="3.1.0">cxf-wsdl</feature>
         <bundle dependency="true" start-level='85'>wrap:mvn:com.owlike/genson/1.2$Bundle-SymbolicName=Genson&amp;Bundle-Version=1.2</bundle>
         <bundle dependency="true" start-level='85'>mvn:org.slf4j/slf4j-log4j12/1.6.6</bundle>
         <bundle dependency="true" start-level='85'>wrap:mvn:oro/oro/2.0.8$Bundle-SymbolicName=JakarthaOro&amp;Bundle-Version=2.0.8</bundle>
@@ -27,7 +28,6 @@
         <bundle dependency="true" start-level="85">mvn:com.fasterxml.jackson.core/jackson-core/2.7.0</bundle>
         <bundle dependency="true" start-level="85">mvn:com.fasterxml.jackson.core/jackson-databind/2.7.0</bundle>
         <bundle dependency="true" start-level="85">mvn:com.fasterxml.jackson.core/jackson-annotations/2.7.0</bundle>
-        <bundle dependency="true" start-level="85">wrap:mvn:wsdl4j/wsdl4j/1.6.2</bundle>
         <bundle dependency="true" start-level="85">mvn:javax.jms/javax.jms-api/2.0</bundle>
 
         <bundle start-level='88'>mvn:com.fiorano.openesb/security/0.1.0</bundle>

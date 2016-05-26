@@ -28,9 +28,10 @@
         <module>schema-repo</module>
         <module>rmi-connector</module>
         <module>fiorano-openesb-amq-feature</module>
+        <module>fiorano-openesb-fmq-feature</module>
         <module>management</module>
         <module>tools</module>
-        <!--<module>fmq-transport</module>-->
+        <module>fmq-transport</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
