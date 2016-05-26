@@ -1,6 +1,6 @@
 ```
 /*
- * Fiorano Open ESB is licensed under the Common Public Atttribution License (CPAL).
+ * Fiorano ESB is licensed under the Common Public Atttribution License (CPAL).
  *
  * "The contents of this file are subject to the Common Public Attribution License Version 1.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy of the License here:
@@ -13,11 +13,11 @@
  */
 ```
 
-##Welcome to Fiorano OpenESB##
+##Welcome to Fiorano ESB##
 
-Fiorano OpenESB enables application integration by choreographing Microservices into asynchronous flows via the Fiorano Studio and associated tools. The Component Control Protocol (CCP), a wire-level protocol, allows the asynchronous communication between the ESB server and micro services being choreographed/orchestrated into application flows. The transport is pluggable and any available JMS engine may be used such as Apache ActiveMQ, JBOSS, TIBCO, IBM, RabbitMQ and FioranoMQ.
+Fiorano ESB enables application integration by choreographing Microservices into asynchronous flows via the Fiorano Studio and associated tools. The Component Control Protocol (CCP), a wire-level protocol, allows the asynchronous communication between the ESB server and micro services being choreographed/orchestrated into application flows. The transport is pluggable and any available JMS engine may be used such as Apache ActiveMQ, JBOSS, TIBCO, IBM, RabbitMQ and FioranoMQ.
 
-Fiorano OpenESB is bundled with a Microservices toolkit that enables the development of JMS-compliant Microservices in a number of supported languages including Java, C, C++ and C#.  
+Fiorano ESB is bundled with a Microservices toolkit that enables the development of JMS-compliant Microservices in a number of supported languages including Java, C, C++ and C#.  
 See [Fiorano Microservices Tookit](https://github.com/FioranoSoftware/Fiorano-Microservice-Toolkit) for more info regarding the microservices.
 
 ##Getting Started##
@@ -25,7 +25,7 @@ See [Fiorano Microservices Tookit](https://github.com/FioranoSoftware/Fiorano-Mi
 Refer to the [Quick Start Guide](http://fiorano.com/documentation/display/OSE/Quick+Start+Guide) to get started in hardly ten minutes.
 
 ##Documentation##
-Refer to http://fiorano.com/documentation/display/OSE/Fiorano+OpenESB+Platform for our comprehensive Open Source documentation including details such as system requirements to install Fiorano OpenESB, features of Fiorano OpenESB, difference between the open source version and commercial version.
+Refer to http://fiorano.com/documentation/display/OSE/Fiorano+ESB+Platform for our comprehensive Open Source documentation including details such as system requirements to install Fiorano ESB, features of Fiorano ESB, difference between the open source version and commercial version.
 
 ##Contributing##
 To contribute:

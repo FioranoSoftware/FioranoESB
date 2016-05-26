@@ -349,7 +349,6 @@ public class MicroServiceManager extends AbstractRmiManager implements IServiceM
         finally {
             //deleting the temporary extracted folder
             FileUtil.deleteDir(extractedFolder);
-            killRunningInstances = false;
         }
     }
 
@@ -552,8 +551,12 @@ public class MicroServiceManager extends AbstractRmiManager implements IServiceM
         try {
             logger.info(RBUtil.getMessage(Bundle.class, Bundle.DELETE_SERVICE_INIT, id));
             String versionString = String.valueOf(version);
+            try {
+                stopAllServices(id, versionString);
+            } catch (FioranoException e) {
+                logger.error(RBUtil.getMessage(Bundle.class, Bundle.ERROR_STOPPING_COMPONENT, e));;
+            }
             microServiceRepository.removeService(id, versionString, killRunningInstances, handleId);
-            this.killRunningInstances = killRunningInstances;
             logger.info(RBUtil.getMessage(Bundle.class, Bundle.DELETE_SERVICE_SUCCESSFUL_IP, id ));
         } catch (FioranoException e) {
             logger.error(RBUtil.getMessage(Bundle.class, Bundle.ERROR_DELETE_SERVICE_IP, id), e);

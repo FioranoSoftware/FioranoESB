@@ -1263,8 +1263,12 @@ public class ApplicationController {
                 ApplicationInfo appInfo = (ApplicationInfo) appStates.get(appGuidAndVersion);
                 ApplicationStateDetails appStateDetails = appInfo.getAppStateDetails();
                 try {
+                    if(applicationHandleMap.get(appGuidAndVersion)!=null){
+                        continue;
+                    }
                     ApplicationHandle applicationHandle = new ApplicationHandle(this, savedApplicationMap.get(appGuidAndVersion),microServiceLauncher, routeService, transport, appInfo.getUserName(), appInfo.getPassword() );
                     applicationHandle.createRoutes();
+                    updateApplicationHandleMap(applicationHandle);
                     ApplicationEventRaiser.generateApplicationEvent(ApplicationEvent.ApplicationEventType.APPLICATION_LAUNCHED, Event.EventCategory.INFORMATION,
                             appStateDetails.getAppGUID(), null, appStateDetails.getAppVersion(), "Application launched Successfully");
 

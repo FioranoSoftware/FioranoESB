@@ -12,6 +12,7 @@ public class JavaLaunchConfiguration implements AdditionalConfiguration {
     private boolean isDebugMode;
     private int debugPort;
     private String providerUrl;
+    private String fioranoHome;
     private String compRepoPath;
     private String schemaRepoPath;
     private String jettyUrl;
@@ -24,10 +25,11 @@ public class JavaLaunchConfiguration implements AdditionalConfiguration {
     public JavaLaunchConfiguration(){
     }
 
-    public JavaLaunchConfiguration(boolean isDebugMode, int debugPort, String providerUrl, String compRepoPath, String schemaRepoPath, String jettyURL, String jettySSLUrl, boolean watchForControlEvents, String MS_JAVA_HOME, String userDefinedJavaHome, String ICF){
+    public JavaLaunchConfiguration(boolean isDebugMode, int debugPort, String providerUrl, String fioranoHome, String compRepoPath, String schemaRepoPath, String jettyURL, String jettySSLUrl, boolean watchForControlEvents, String MS_JAVA_HOME, String userDefinedJavaHome, String ICF){
         this.isDebugMode = isDebugMode;
         this.debugPort = debugPort;
         this.providerUrl = providerUrl;
+        this.fioranoHome = fioranoHome;
         this.compRepoPath = compRepoPath;
         this.schemaRepoPath = schemaRepoPath;
         this.jettySSLUrl = jettySSLUrl;
@@ -60,6 +62,14 @@ public class JavaLaunchConfiguration implements AdditionalConfiguration {
 
     public void setProviderUrl(String providerUrl) {
         this.providerUrl = providerUrl;
+    }
+
+    public String getFioranoHome() {
+        return fioranoHome;
+    }
+
+    public void setFioranoHome(String fioranoHome) {
+        this.fioranoHome = fioranoHome;
     }
 
     public String getCompRepoPath() {
