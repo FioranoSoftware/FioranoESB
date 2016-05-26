@@ -8,10 +8,10 @@
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
     <feature name='${project.artifactId}' description='${project.name}' version='${project.version}'>
         <details>${project.description}</details>
-        <feature version="3.1.0">cxf-core</feature>
-        <feature version="3.1.0">cxf-jaxrs</feature>
-        <feature version="3.1.0">cxf-wsdl</feature>
-        <feature version="5.13.1">activemq-broker</feature>
+        <feature prerequisite="true" version="3.1.0" description="">cxf-core</feature>
+        <feature prerequisite="true" version="3.1.0">cxf-jaxrs</feature>
+        <feature prerequisite="true" version="3.1.0">cxf-wsdl</feature>
+        <feature prerequisite="true" version="5.13.1">activemq-broker</feature>
         <bundle dependency="true" start-level='85'>wrap:mvn:com.owlike/genson/1.2$Bundle-SymbolicName=Genson&amp;Bundle-Version=1.2</bundle>
         <bundle dependency="true" start-level='85'>mvn:org.slf4j/slf4j-log4j12/1.6.6</bundle>
         <bundle dependency="true" start-level='85'>wrap:mvn:oro/oro/2.0.8$Bundle-SymbolicName=JakarthaOro&amp;Bundle-Version=2.0.8</bundle>
