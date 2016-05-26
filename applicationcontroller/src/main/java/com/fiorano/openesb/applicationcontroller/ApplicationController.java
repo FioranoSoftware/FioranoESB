@@ -201,6 +201,9 @@ public class ApplicationController {
         }
         String appGuid = application.getGUID();
         float version = application.getVersion();
+        if(isApplicationRunning(appGuid, version, handleID)){
+            ResourceAvailabilityChecker.checkResourceAndConnectivity(application, microServiceRepoManager);
+        }
         Application oldApp = savedApplicationMap.get(appGuid+Constants.NAME_DELIMITER+version);
         applicationRepository.saveApplication(application, appFileFolder, userName, zippedContents, handleID);
         savedApplicationMap.put(application.getGUID() + Constants.NAME_DELIMITER + application.getVersion(), application);

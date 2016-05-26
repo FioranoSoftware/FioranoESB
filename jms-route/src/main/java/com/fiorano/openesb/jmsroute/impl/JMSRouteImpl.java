@@ -24,6 +24,7 @@ public class JMSRouteImpl extends AbstractRouteImpl<JMSMessage> implements Route
     private Consumer<JMSMessage> messageConsumer;
     private String sourceDestintaion;
     private String targetDestination;
+    private boolean isStarted;
 
     public JMSRouteImpl(String routeName, final TransportService<JMSPort, JMSMessage> transportService, final RouteConfiguration routeConfiguration) throws Exception {
         super(routeName, routeConfiguration.getRouteOperationConfigurations());
@@ -44,6 +45,9 @@ public class JMSRouteImpl extends AbstractRouteImpl<JMSMessage> implements Route
     }
 
     public void start() throws Exception {
+        if(isStarted){
+            return;
+        }
         producer = transportService.createProducer(transportService.enablePort(routeConfiguration.getDestinationConfiguration()), new JMSProducerConfiguration());
         messageConsumer = transportService.createConsumer(sourcePort, routeConfiguration.getConsumerConfiguration());
         this.sourceDestintaion = routeConfiguration.getSourceConfiguration().getName();
@@ -58,11 +62,13 @@ public class JMSRouteImpl extends AbstractRouteImpl<JMSMessage> implements Route
                 }
             }
         });
+        isStarted = true;
     }
 
     public void stop() throws Exception {
         messageConsumer.close();
         producer.close();
+        isStarted=false;
     }
 
     public void delete() {

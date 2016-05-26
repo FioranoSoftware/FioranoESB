@@ -32,10 +32,14 @@ public class ResourceAvailabilityChecker {
             String currentGUID = current_AppGUIDAndVersion[0];
             Float currentVersion = Float.valueOf(current_AppGUIDAndVersion[1]);
             Application currentApplication = applicationController.getSavedApplication(currentGUID, currentVersion);
-                for(ServiceInstance si:currentApplication.getServiceInstances()){
-                    validateServicesBeforeLaunch(currentApplication, microServiceRepoManager, si);
-                }
+            checkResourceAndConnectivity(currentApplication, microServiceRepoManager);
             }
+    }
+
+    public static void checkResourceAndConnectivity(Application application, MicroServiceRepoManager microServiceRepoManager) throws FioranoException{
+        for(ServiceInstance si:application.getServiceInstances()){
+            validateServicesBeforeLaunch(application, microServiceRepoManager, si);
+        }
     }
 
     private static void validateServicesBeforeLaunch(Application application,  MicroServiceRepoManager microServiceRepoManager, ServiceInstance instance) throws FioranoException {
