@@ -9,6 +9,7 @@ package com.fiorano.openesb.applicationcontroller;
 import com.fiorano.openesb.application.BreakpointMetaData;
 import com.fiorano.openesb.application.ServerConfig;
 import com.fiorano.openesb.application.application.*;
+import com.fiorano.openesb.application.service.RuntimeArgument;
 import com.fiorano.openesb.events.ApplicationEvent;
 import com.fiorano.openesb.events.Event;
 import com.fiorano.openesb.microservice.ccp.event.common.data.MemoryUsage;
@@ -673,7 +674,8 @@ public class ApplicationHandle {
         }
         logger.info("Starting MicroService: " + microServiceName + " of Application " + appGUID + ":" + version);
         TransportConfig transportConfig = TransportConfig.getInstance();
-        String instanceValue = (String) instance.getRuntimeArgument("JAVA_HOME").getValue();
+        RuntimeArgument java_home = instance.getRuntimeArgument("JAVA_HOME");
+        String instanceValue = java_home == null ? null : (String) java_home.getValue();
         String value =  instanceValue != null ? instanceValue : transportConfig.getValue(LaunchConstants.USER_DEFINED_JAVA_HOME);
         JavaLaunchConfiguration javaLaunchConfiguration = new JavaLaunchConfiguration(instance.isDebugMode(),
                 instance.getDebugPort(), transportConfig.getProviderURL(), System.getProperty("user.dir"), MicroServiceRepoManager.getInstance().getRepositoryLocation(), ServerConfig.getConfig().getRepositoryPath() + File.separator + SchemaRepoConstants.SCHEMA_REPOSITORY_NAME,

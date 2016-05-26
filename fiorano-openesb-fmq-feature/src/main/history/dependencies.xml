@@ -3,6 +3,7 @@
     <feature version="0.0.0">
         <feature prerequisite="false" dependency="false">cxf-core</feature>
         <feature prerequisite="false" dependency="false">cxf-jaxrs</feature>
+        <feature prerequisite="false" dependency="false">cxf-wsdl</feature>
         <bundle>mvn:com.fasterxml.jackson.core/jackson-annotations/2.7.0</bundle>
         <bundle>mvn:com.fasterxml.jackson.core/jackson-core/2.7.0</bundle>
         <bundle>mvn:com.fasterxml.jackson.core/jackson-databind/2.7.0</bundle>
@@ -37,7 +38,6 @@
         <bundle>wrap:mvn:net.sf.saxon/Saxon-HE/9.7.0-4$Bundle-SymbolicName=SaxonHE&amp;Bundle-Version=9.7</bundle>
         <bundle>wrap:mvn:oro/oro/2.0.8$Bundle-SymbolicName=JakarthaOro&amp;Bundle-Version=2.0.8</bundle>
         <bundle>wrap:mvn:woodstox/wstx-asl/2.6$Bundle-SymbolicName=woodstox-asl&amp;Bundle-Version=2.6</bundle>
-        <bundle>wrap:mvn:wsdl4j/wsdl4j/1.6.2</bundle>
         <bundle>wrap:mvn:xml-resolver/xml-resolver/1.2$Bundle-SymbolicName=resolver&amp;Bundle-Version=1.2</bundle>
         <bundle>wrap:mvn:xmlunit/xmlunit/1.6$Bundle-SymbolicName=xmlunit&amp;Bundle-Version=1.6</bundle>
     </feature>

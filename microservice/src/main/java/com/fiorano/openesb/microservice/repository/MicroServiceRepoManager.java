@@ -311,10 +311,10 @@ public class MicroServiceRepoManager {
         if (sps == null)
             sps = m_committedServiceVsProperties.get(getUniqueKey(serviceGUID, version));
 
-        if (sps == null)
-            throw new FioranoException("sps null");
-            //LogHelper.getErrMessage(ILogModule.SERVICE_REPOSITORY, 14, serviceGUID, version));
-
+        if (sps == null) {
+            logger.error("Service " + getUniqueKey(serviceGUID,version) +" is not present in repository");
+            throw new FioranoException("Service not found : " + getUniqueKey(serviceGUID, version));
+        }
         else
             return sps;
     }
@@ -1574,7 +1574,8 @@ public class MicroServiceRepoManager {
         String resFilePath = getResourcePath(serviceGUID, version, resName);
         resFile = new File(resFilePath);
         if (!resFile.exists()) {
-            throw new FioranoException("RESOURCE_FILE_NOTPRESENT");
+            throw new FioranoException("Resource " + resFile.getAbsolutePath() + " of "+
+                    getUniqueKey(serviceGUID,version)+" is not present in repository");
         }
         return resFile;
     }
