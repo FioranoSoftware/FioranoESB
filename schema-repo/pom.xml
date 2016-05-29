@@ -83,7 +83,7 @@
                             com.fiorano.openesb.schemarepo*;version=${project.version}
                         </Export-Package>
                         <Import-Package>
-                            *
+                            !org.codehaus*,!com.ctc*,*
                         </Import-Package>
                     </instructions>
                 </configuration>

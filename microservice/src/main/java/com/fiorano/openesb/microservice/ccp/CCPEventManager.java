@@ -53,7 +53,7 @@ public class CCPEventManager implements MessageListener<Message> {
         cToP.setName("CCP_COMPONENT_TO_PEER_TRANSPORT");
         Port port = transportService.enablePort(cToP);
 
-        Consumer<Message> consumer = transportService.createConsumer(port, new JMSConsumerConfiguration(null));
+        Consumer<Message> consumer = transportService.createConsumer(port, new JMSConsumerConfiguration(null), "CCP");
         consumer.attachMessageListener(this);
 
     }
@@ -180,7 +180,7 @@ public class CCPEventManager implements MessageListener<Message> {
             this.sendTopic = sendTopic;
         }
         public void createProducer() throws Exception {
-            producer = transportService.createProducer(sendTopic, new JMSProducerConfiguration());
+            producer = transportService.createProducer(sendTopic, new JMSProducerConfiguration(),"CCP");
         }
     }
 }

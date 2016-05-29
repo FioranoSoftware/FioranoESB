@@ -29,7 +29,6 @@ public class Activator implements BundleActivator {
     }
 
     public void start(BundleContext context) throws Exception {
-        System.out.println("Starting Active MQ Transport");
         try {
             Properties properties = new Properties();
             try (FileInputStream inStream = new FileInputStream(System.getProperty("user.dir") + File.separator
@@ -39,6 +38,7 @@ public class Activator implements BundleActivator {
             if (properties.containsKey("provider.name") && !"activemq".equalsIgnoreCase(properties.getProperty("provider.name"))) {
                 return;
             }
+            System.out.println("Starting Active MQ Transport");
             service = new AMQTransportService(properties);
         } catch (JMSException e) {
             System.out.println("Could not connect to MQ Server.");

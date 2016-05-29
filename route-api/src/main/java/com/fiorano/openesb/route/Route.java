@@ -16,7 +16,7 @@ public interface Route<M extends Message> {
     void delete();
     void changeTargetDestination(PortConfiguration portConfiguration) throws Exception;
     void changeSourceDestination(PortConfiguration portConfiguration) throws Exception;
-    void handleMessage(M message) throws Exception;
+    void handleMessage(M message);
     String getSourceDestinationName();
     String getTargetDestinationName();
     void modifyHandler(RouteOperationConfiguration configuration) throws Exception;

@@ -394,6 +394,7 @@ public class ApplicationHandle {
     public void stopRoute(Route route) throws Exception {
         if(route!=null){
             route.stop();
+            route.delete();
         }
     }
 

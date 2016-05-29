@@ -7,15 +7,20 @@
 package com.fiorano.openesb.transport.impl.jms;
 
 import com.fiorano.openesb.transport.*;
+import com.fiorano.openesb.transport.bundle.Activator;
+import org.slf4j.LoggerFactory;
 
 import javax.jms.*;
 import javax.jms.Message;
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ConcurrentHashMap;
 
 public abstract class AbstractJMSTransportService implements TransportService<JMSPort, JMSMessage> {
 
-    private Session session;
     protected Properties properties;
+    private Map<String, Session> sessions = new ConcurrentHashMap<>();
+    private Connection connection;
 
     protected AbstractJMSTransportService(Properties properties) throws Exception {
         this.properties = properties;
@@ -23,12 +28,11 @@ public abstract class AbstractJMSTransportService implements TransportService<JM
 
     protected void initialize() throws Exception {
         ConnectionFactory cf = ((AbstractJMSConnectionProvider) getConnectionProvider()).getConnectionFactory("ConnectionFactory");
-        Connection connection;
-        String connectionRetryCount = TransportConfig.getInstance().getValue("CONNECTION_RETRY_COUNT", "5");
+        String connectionRetryCount = TransportConfig.getInstance().getValue("CONNECTION_RETRY_COUNT", "10");
         int count = Integer.valueOf(connectionRetryCount), i = 0;
         while ((connection = getConnection(cf))== null && i++ < count) {
             try {
-                String connectionRetryInterval = TransportConfig.getInstance().getValue("CONNECTION_LOOKUP_INTERVAL", "2000");
+                String connectionRetryInterval = TransportConfig.getInstance().getValue("CONNECTION_RETRY_INTERVAL", "3000");
                 System.out.println("Waiting for connection with JMS provider. Attempt - " + i);
                 Thread.sleep(Long.valueOf(connectionRetryInterval));
             } catch (InterruptedException e1) {
@@ -38,7 +42,6 @@ public abstract class AbstractJMSTransportService implements TransportService<JM
         if(connection == null) {
             throw new JMSException("Could not connect to JMS server");
         }
-        session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
     }
 
     private Connection getConnection(ConnectionFactory cf) throws JMSException {
@@ -56,20 +59,33 @@ public abstract class AbstractJMSTransportService implements TransportService<JM
         }
     }
 
-    public Consumer<JMSMessage> createConsumer(JMSPort port, ConsumerConfiguration consumerConfiguration) throws Exception {
+    public Consumer<JMSMessage> createConsumer(JMSPort port, ConsumerConfiguration consumerConfiguration,String sessionId) throws Exception {
         String selector = ((JMSConsumerConfiguration) consumerConfiguration).getSelector();
+        Session session = getSession(sessionId);
         MessageConsumer messageConsumer = selector != null ? session.createConsumer(port.getDestination(), selector) :
                 session.createConsumer(port.getDestination());
         return new JMSConsumer(messageConsumer);
     }
 
-    public Producer<JMSMessage> createProducer(JMSPort port, ProducerConfiguration producerConfiguration) throws JMSException {
-        return new JMSProducer(session.createProducer(port.getDestination()));
+    private Session getSession(String sessionId) throws JMSException {
+        Session session;
+        if(sessions.containsKey(sessionId)) {
+            session = sessions.get(sessionId);
+        } else {
+            session = connection.createSession(false,Session.AUTO_ACKNOWLEDGE);
+            sessions.put(sessionId,session);
+        }
+        return session;
+    }
+
+    public Producer<JMSMessage> createProducer(JMSPort port, ProducerConfiguration producerConfiguration, String sessionId) throws JMSException {
+        return new JMSProducer(getSession(sessionId).createProducer(port.getDestination()));
     }
 
     public JMSMessage createMessage(MessageConfiguration messageConfiguration) throws Exception {
         JMSMessageConfiguration config = (JMSMessageConfiguration) messageConfiguration;
         Message message;
+        Session session = getSession("DEFAULT");
         switch (config.getType()) {
             case Bytes:
                 message = session.createBytesMessage();
@@ -92,6 +108,7 @@ public abstract class AbstractJMSTransportService implements TransportService<JM
 
     public JMSPort enablePort(PortConfiguration configuration) throws Exception {
         JMSPortConfiguration portConfiguration = (JMSPortConfiguration) configuration;
+        Session session = getSession("DEFAULT");
         switch (portConfiguration.getPortType()) {
             case QUEUE:
                 return new JMSPort(session.createQueue(portConfiguration.getName()));
@@ -99,5 +116,17 @@ public abstract class AbstractJMSTransportService implements TransportService<JM
                 return new JMSPort(session.createTopic(portConfiguration.getName()));
         }
         return null;
+    }
+
+    @Override
+    public void closeSession(String sessionId) {
+        if(sessions.containsKey(sessionId)) {
+            Session remove = sessions.remove(sessionId);
+            try {
+                remove.close();
+            } catch (JMSException e) {
+                LoggerFactory.getLogger(Activator.class).debug(e.getMessage(),e);
+            }
+        }
     }
 }

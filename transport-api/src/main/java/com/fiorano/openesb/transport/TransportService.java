@@ -15,10 +15,12 @@ public interface TransportService<E extends Port, M extends Message> {
 
     void disablePort(PortConfiguration portConfiguration) throws Exception;
 
-    Consumer<M> createConsumer(E port, ConsumerConfiguration consumerConfiguration) throws Exception;
+    Consumer<M> createConsumer(E port, ConsumerConfiguration consumerConfiguration,String sessionId) throws Exception;
 
-    Producer<M> createProducer(E port, ProducerConfiguration producerConfiguration) throws Exception;
+    Producer<M> createProducer(E port, ProducerConfiguration producerConfiguration,String sessionId) throws Exception;
 
     M createMessage(MessageConfiguration config) throws Exception;
+
+    void closeSession(String sessionId);
 
 }

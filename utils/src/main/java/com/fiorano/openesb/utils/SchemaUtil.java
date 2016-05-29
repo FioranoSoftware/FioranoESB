@@ -6,35 +6,26 @@
  */
 package com.fiorano.openesb.utils;
 
-import com.ctc.wstx.evt.CompactStartElement;
 import com.ctc.wstx.evt.SimpleStartElement;
 import com.ctc.wstx.evt.WAttribute;
-import com.ctc.wstx.evt.WNamespace;
 import com.ctc.wstx.util.BaseNsContext;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xml.sax.*;
+import com.fiorano.openesb.utils.xml.stax.FioranoStaxParser;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.fiorano.openesb.utils.xml.stax.FioranoStaxParser;
-
 import javax.xml.namespace.QName;
-import javax.xml.parsers.*;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.events.Attribute;
-import javax.xml.stream.events.Namespace;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
