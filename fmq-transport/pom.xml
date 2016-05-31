@@ -10,13 +10,13 @@
     <parent>
         <artifactId>OpenESBProject</artifactId>
         <groupId>com.fiorano.openesb</groupId>
-        <version>0.1.0</version>
+        <version>1.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>fmq-transport</artifactId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
 
     <name>Fiorano MQ Transport</name>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.fiorano.openesb</groupId>
             <artifactId>transport-api</artifactId>
-            <version>0.1.0</version>
+            <version>1.0.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

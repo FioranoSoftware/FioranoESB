@@ -12,7 +12,7 @@
 
     <groupId>com.fiorano.openesb</groupId>
     <artifactId>OpenESBProject</artifactId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
     <modules>
         <module>utils</module>
         <module>events</module>
@@ -35,7 +35,7 @@
     </modules>
     <packaging>pom</packaging>
     <properties>
-        <project.version>0.1.0</project.version>
+        <project.version>1.0.0</project.version>
     </properties>
     <name>OpenESBProject</name>
     <description>OpenESBProject</description>
