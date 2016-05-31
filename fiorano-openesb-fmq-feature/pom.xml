@@ -10,7 +10,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fiorano.openesb</groupId>
-    <version>0.1.0</version>
+    <version>1.0.0</version>
 
     <artifactId>fiorano-openesb-fmq</artifactId>
     <packaging>feature</packaging>
