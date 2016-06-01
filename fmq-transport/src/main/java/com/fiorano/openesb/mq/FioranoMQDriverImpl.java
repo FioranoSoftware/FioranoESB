@@ -6,6 +6,7 @@
  */
 package com.fiorano.openesb.mq;
 
+import fiorano.jms.common.FioranoException;
 import fiorano.jms.md.UnifiedConnectionFactoryMetaData;
 import fiorano.jms.runtime.admin.MQAdminConnection;
 import fiorano.jms.runtime.admin.MQAdminConnectionFactory;
@@ -16,25 +17,32 @@ import org.slf4j.LoggerFactory;
 import javax.jms.ConnectionFactory;
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import java.util.Properties;
 
 public class FioranoMQDriverImpl implements MQDriver {
 
-    private final MQAdminConnection ac;
-    private final MQAdminService adminService;
-    private final InitialContext ic;
+    private MQAdminConnection ac;
+    private MQAdminService adminService;
+    private InitialContext ic;
     private final Logger logger;
     private Properties properties;
 
     public FioranoMQDriverImpl(Properties properties) throws Exception {
         this.properties = properties;
         logger = LoggerFactory.getLogger(Activator.class.getName());
+    }
+
+    public void initialize(Properties properties) throws FioranoException, NamingException {
+        properties.setProperty("java.naming.provider.url", properties.getProperty("providerURL"));
+        properties.setProperty("provider.url", properties.getProperty("providerURL"));
         ic = new InitialContext(properties);
         logger.info("Created Initial Context :: " + ic);
         MQAdminConnectionFactory acf = (MQAdminConnectionFactory) ic.lookup(properties.getProperty("fiorano.acf.name"));
         ac = acf.createMQAdminConnection(properties.getProperty(Context.SECURITY_PRINCIPAL), properties.getProperty(Context.SECURITY_CREDENTIALS));
         logger.info("Created Admin Connection :: " + ac);
         adminService = ac.getMQAdminService();
+        System.out.println("Connected to Fiorano MQ Server");
     }
 
     public void deleteDestination(String name, String type) throws Exception {

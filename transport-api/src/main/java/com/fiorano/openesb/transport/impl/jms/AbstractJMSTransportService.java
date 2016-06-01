@@ -27,10 +27,9 @@ public abstract class AbstractJMSTransportService implements TransportService<JM
     }
 
     protected void initialize() throws Exception {
-        ConnectionFactory cf = ((AbstractJMSConnectionProvider) getConnectionProvider()).getConnectionFactory("ConnectionFactory");
         String connectionRetryCount = TransportConfig.getInstance().getValue("CONNECTION_RETRY_COUNT", "10");
         int count = Integer.valueOf(connectionRetryCount), i = 0;
-        while ((connection = getConnection(cf))== null && i++ < count) {
+        while ((connection = getConnection(((AbstractJMSConnectionProvider) getConnectionProvider()).getConnectionFactory("ConnectionFactory")))== null && i++ < count) {
             try {
                 String connectionRetryInterval = TransportConfig.getInstance().getValue("CONNECTION_RETRY_INTERVAL", "3000");
                 System.out.println("Waiting for connection with JMS provider. Attempt - " + i);

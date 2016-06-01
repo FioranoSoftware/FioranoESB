@@ -53,6 +53,12 @@ public class MQTransportService extends AbstractJMSTransportService
     }
 
     @Override
+    protected void initialize() throws Exception {
+        mqDriver.initialize(properties);
+        super.initialize();
+    }
+
+    @Override
     public ConnectionProvider getConnectionProvider() {
         return new MQConnectionProvider(properties, mqDriver);
     }

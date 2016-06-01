@@ -19,8 +19,11 @@
 package com.fiorano.openesb.mq;
 
 import javax.jms.ConnectionFactory;
+import java.util.Properties;
 
 public interface MQDriver {
+    void initialize(Properties properties) throws Exception;
+
     ConnectionFactory getConnectionFactory(String name) throws Exception;
 
     void deleteDestination(String name, String type) throws Exception;
