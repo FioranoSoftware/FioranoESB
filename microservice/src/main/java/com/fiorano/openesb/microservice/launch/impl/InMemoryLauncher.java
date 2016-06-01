@@ -140,6 +140,7 @@ public class InMemoryLauncher implements Launcher {
             ClassLoader serverClassLoader = Thread.currentThread().getContextClassLoader();
             try {
                 if(launchConfiguration.getAdditionalConfiguration().getICF()==null){
+                    @SuppressWarnings("unused") ClassLoader stopClassLoader = classLoaderManager.getClassLoader(getComponentPS(), launchConfiguration, RemoveInfo.class.getClassLoader());
                 }
                 Thread.currentThread().setContextClassLoader(serviceClassLoader);
                 @SuppressWarnings("unchecked")
