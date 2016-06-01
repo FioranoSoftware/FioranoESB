@@ -13,7 +13,7 @@
  */
 ```
 
-##Welcome to Fiorano ESB##
+##Welcome to Fiorano ESB Community Edition##
 
 Fiorano ESB enables application integration by choreographing Microservices into asynchronous flows via the Fiorano Studio and associated tools. The Component Control Protocol (CCP), a wire-level protocol, allows the asynchronous communication between the ESB server and micro services being choreographed/orchestrated into application flows. The transport is pluggable and any available JMS engine may be used such as Apache ActiveMQ, JBOSS, TIBCO, IBM, RabbitMQ and FioranoMQ.
 
