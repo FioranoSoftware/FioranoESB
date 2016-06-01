@@ -139,7 +139,8 @@ public class InMemoryLauncher implements Launcher {
         public void stop() throws Exception {
             ClassLoader serverClassLoader = Thread.currentThread().getContextClassLoader();
             try {
-                ClassLoader stopClassLoader = classLoaderManager.getClassLoader(getComponentPS(), launchConfiguration, RemoveInfo.class.getClassLoader());
+                if(launchConfiguration.getAdditionalConfiguration().getICF()==null){
+                }
                 Thread.currentThread().setContextClassLoader(serviceClassLoader);
                 @SuppressWarnings("unchecked")
                 Method shutDownMethod = serviceClass.getMethod("shutdown", Object.class);
