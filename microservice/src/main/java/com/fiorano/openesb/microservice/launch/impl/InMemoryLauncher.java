@@ -139,7 +139,8 @@ public class InMemoryLauncher implements Launcher {
         public void stop() throws Exception {
             ClassLoader serverClassLoader = Thread.currentThread().getContextClassLoader();
             try {
-                if(launchConfiguration.getAdditionalConfiguration().getICF()==null){
+                String icf = launchConfiguration.getAdditionalConfiguration().getICF();
+                if(icf ==null || icf.contains("activemq")){
                     @SuppressWarnings("unused") ClassLoader stopClassLoader = classLoaderManager.getClassLoader(getComponentPS(), launchConfiguration, RemoveInfo.class.getClassLoader());
                 }
                 Thread.currentThread().setContextClassLoader(serviceClassLoader);
